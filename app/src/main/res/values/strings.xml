@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">致卓纸板生管系统</string>
+
+    <string name="menu_option_refresh">刷新</string>
+    <string name="menu_option_change">切换</string>
+
+    <string name="dialog_title">请输入名称</string>
+    <string name="dialog_sure">确定</string>
+    <string name="dialog_cancel">取消</string>
+
+    <string name="toast_refresh_success">刷新成功</string>
+    <string name="toast_error">出错了</string>
+    <string name="toast_error_format">数据格式有误</string>
+    <string name="toast_input">请输入正确的名称</string>
+
+
+</resources>
