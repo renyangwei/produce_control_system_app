@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="groups">
+        <item>一号线</item>
+        <item>二号线</item>
+        <item>三号线</item>
+    </string-array>
+</resources>

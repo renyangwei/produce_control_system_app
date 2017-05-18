@@ -1,8 +1,11 @@
 package com.papermanagement;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,12 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private static final String HOST = "http://180.76.163.58:8081/factory/";
+    private static final String HOST_FACTORY = "http://192.168.1.107:8081/factory/";
+    private static final String HOST_GROUPS = "http://192.168.1.107:8081/factory/";
     //10.0.2.2
+    //192.168.1.107
     //180.76.163.58
 
     TextView tvFactory;
@@ -57,6 +69,19 @@ public class MainActivity extends AppCompatActivity {
 
     MyRunnable runnable;
 
+    Spinner spinner;
+
+    ImageButton ibOptions;
+
+    PopupWindow window;
+
+    ArrayAdapter<String> spinnerAdapter;
+
+    ArrayList<String> listGroup;
+
+    String fact;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,16 +90,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         //是否输入厂名
-        String factory = readFactory();
+        String factory = DataUtils.readFactory(this);
         if (TextUtils.equals(factory, "empty")) {
             showInputDialog();
         } else {
-            refreshTime = 0;
-            refreshing = true;
-            startRefreshRegular(factory);
+//            refreshTime = 0;
+//            refreshing = true;
+//            startRefreshRegular(factory, defaultGroup);
+            fact = factory;
+            readGroups(factory);
         }
     }
 
@@ -94,7 +121,29 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         handler = new Handler();
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
+        spinner = (Spinner) findViewById(R.id.spinner_group);
+        spinner.setOnItemSelectedListener(itemSelectedListener);
+        ibOptions = (ImageButton) findViewById(R.id.ib_options);
     }
+
+    AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Log.d(TAG, "you clicked position:" + position);
+            btnRefresh.setText("刷新(开始)");
+            refreshing = false;
+            handler.removeCallbacks(runnable);
+
+            refreshTime = 0;
+            refreshing = true;
+            startRefreshRegular(fact, listGroup.get(position));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     /**
      * 切换点击
@@ -121,40 +170,67 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * 显示popWindow
+     * @param view  视图
+     */
+    public void onShowPopWindow(View view) {
+        showPopWindow();
+    }
+
+    private void showPopWindow() {
+        View popupView = getLayoutInflater().inflate(R.layout.popupwindow, null);
+        window = new PopupWindow(popupView, DataUtils.dip2px(this, 150), DataUtils.dip2px(this, 200));
+        window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
+        window.setFocusable(true);
+        window.setOutsideTouchable(true);
+        window.update();
+        window.showAsDropDown(ibOptions, 0, 0);
+
+    }
+
+    /**
+     * 跳转到历史数据
+     * @param view
+     */
+    public void onToHistory(View view) {
+        window.dismiss();
+        startActivity(new Intent(this, HistoryDataActivity.class));
+    }
+
+    /**
      * 从服务端获得数据
      * @param factory 厂家名称
      */
-    private void getData(String factory) {
+    private void getData(String factory, String group) {
         Log.d(TAG, "getData, first factory:" + factory);
         progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
                         //这里建议：- Base URL: 总是以/结尾；- @Url: 不要以/开头
-                .baseUrl(HOST)
+                .baseUrl(HOST_FACTORY)
                 .build();
         PaperService paperService = retrofit.create(PaperService.class);
-        Call<PaperManangeBean> call = paperService.getPaper(factory);
-        call.enqueue(new Callback<PaperManangeBean>() {
+        Call<PaperManageBean> call = paperService.getPaper(factory, group);
+        call.enqueue(new Callback<PaperManageBean>() {
             @Override
-            public void onResponse(Call<PaperManangeBean> call, Response<PaperManangeBean> response) {
+            public void onResponse(Call<PaperManageBean> call, Response<PaperManageBean> response) {
                 progressBar.setVisibility(View.INVISIBLE);
-                PaperManangeBean paperManangeBean = response.body();
-                Log.d(TAG, paperManangeBean.toString());
+                PaperManageBean paperManangeBean = response.body();
                 try {
-                    adapter.setData(DataUtil.parseInfo(paperManangeBean.getOther()));
+                    Log.d(TAG, paperManangeBean.toString());
+                    adapter.setData(DataUtils.parseInfo(paperManangeBean.getOther()));
                 } catch (Exception e) {
-//                    e.printStackTrace();
                     Toast.makeText(getBaseContext(), getString(R.string.toast_error_format), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String fa = paperManangeBean.getFactory();
                 Log.d(TAG, "getData, factory:" + fa);
                 tvFactory.setText(fa);
-                saveFactory(fa);
+                DataUtils.saveFactory(fa, MainActivity.this);
             }
 
             @Override
-            public void onFailure(Call<PaperManangeBean> call, Throwable t) {
+            public void onFailure(Call<PaperManageBean> call, Throwable t) {
                 progressBar.setVisibility(View.INVISIBLE);
                 String err = t.toString();
                 Log.e(TAG, err);
@@ -170,16 +246,51 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void saveFactory(String factory) {
-        SharedPreferences sharedPreferences = getSharedPreferences("Factory", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("factory", factory);
-        editor.apply();
-    }
+    /**
+     * 查询产线
+     * @param factory
+     */
+    private void readGroups(String factory) {
+        Log.d(TAG, "readGroups factory is" + factory);
+        progressBar.setVisibility(View.VISIBLE);
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())//解析方法
+                        //这里建议：- Base URL: 总是以/结尾；- @Url: 不要以/开头
+                .baseUrl(HOST_GROUPS)
+                .build();
+        GroupService groupService = retrofit.create(GroupService.class);
+        Call<GroupBean> call = groupService.getGroups(factory);
+        call.enqueue(new Callback<GroupBean>() {
+            @Override
+            public void onResponse(Call<GroupBean> call, Response<GroupBean> response) {
+                progressBar.setVisibility(View.INVISIBLE);
+                GroupBean groupBean = response.body();
+                String groupStr = groupBean.getGroup();
+                Log.d(TAG, "response is " + groupStr);
+                listGroup = new ArrayList<>();
+                String[] groups = groupStr.split(",");
+                for (String str : groups) {
+                    if (!TextUtils.isEmpty(str)) {
+                        listGroup.add(str);
+                    }
+                }
+                spinnerAdapter = new ArrayAdapter<>(MainActivity.this,
+                        android.R.layout.simple_spinner_item, listGroup);
+                spinner.setAdapter(spinnerAdapter);
 
-    private String readFactory() {
-        SharedPreferences sharedPreferences = getSharedPreferences("Factory", MODE_PRIVATE);
-        return sharedPreferences.getString("factory", "empty");
+            }
+
+            @Override
+            public void onFailure(Call<GroupBean> call, Throwable t) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Log.e(TAG, t.toString());
+                Toast.makeText(MainActivity.this, "出错了，请重试", Toast.LENGTH_SHORT).show();
+                btnRefresh.setText("刷新(开始)");
+                refreshing = false;
+                handler.removeCallbacks(runnable);
+            }
+        });
+
     }
 
     /**
@@ -203,8 +314,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton(getText(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (runnable != null) {
-                    handler.post(runnable);
+                if (window != null) {
+                    window.dismiss();
                 }
             }
         });
@@ -213,9 +324,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 refreshTime = 0;
                 refreshing = true;
-                String fa = editText.getText().toString().trim();
-                Log.d(TAG, "dialog positive btn:" + fa);
-                startRefreshRegular(fa);
+                fact = editText.getText().toString().trim();
+                Log.d(TAG, "dialog positive btn:" + fact);
+//                startRefreshRegular(fa);
+                //查询产线
+                readGroups(fact);
+                if (window != null) {
+                    window.dismiss();
+                }
             }
         });
         builder.show();
@@ -225,12 +341,13 @@ public class MainActivity extends AppCompatActivity {
      * 开始刷新
      * @param factory 厂家
      */
-    private void startRefreshRegular(String factory) {
+    private void startRefreshRegular(String factory, String group) {
         Log.d(TAG, "startRefreshRegular, factory:" + factory);
         if (runnable == null) {
-            runnable = new MyRunnable(factory);
+            runnable = new MyRunnable(factory, group);
         } else {
             runnable.setFactory(factory);
+            runnable.setGroup(group);
         }
 
         if (handler != null) {
@@ -246,12 +363,19 @@ public class MainActivity extends AppCompatActivity {
 
         String mFactory;
 
-        public MyRunnable(String factory) {
+        String mGroup;
+
+        public MyRunnable(String factory, String group) {
             mFactory = factory;
+            mGroup = group;
         }
 
         public void setFactory(String factory) {
             this.mFactory = factory;
+        }
+
+        public void setGroup(String group) {
+            this.mGroup = group;
         }
 
         @Override
@@ -259,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
             btnRefresh.setText("刷新(" + refreshTime + ")");
             if (refreshTime <= 0) {
                 refreshTime = TIME_LIMIT;
-                getData(mFactory);
+                getData(mFactory, mGroup);
             } else {
                 refreshTime -= 1;
             }

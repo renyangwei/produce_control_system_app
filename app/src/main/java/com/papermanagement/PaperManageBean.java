@@ -6,13 +6,15 @@ import com.google.gson.annotations.SerializedName;
 /**
  * 纸箱模型
  */
-public class PaperManangeBean {
+public class PaperManageBean {
     @SerializedName("Id")
     @Expose
     private Integer id;
+
     @SerializedName("Factory")
     @Expose
     private String factory;
+
     @SerializedName("Other")
     @Expose
     private String other;

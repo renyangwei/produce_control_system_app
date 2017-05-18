@@ -9,7 +9,7 @@
     <string name="dialog_cancel">取消</string>
 
     <string name="toast_refresh_success">刷新成功</string>
-    <string name="toast_error">出错了</string>
+    <string name="toast_error">出错了,请重试</string>
     <string name="toast_error_format">数据格式有误</string>
     <string name="toast_input">请输入正确的名称</string>
 

@@ -16,4 +16,5 @@
     <style name="MyEditText" parent="Widget.AppCompat.EditText">
         <item name="colorAccent">@color/colorMain</item>
     </style>
+
 </resources>
