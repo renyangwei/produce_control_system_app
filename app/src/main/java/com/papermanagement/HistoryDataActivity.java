@@ -25,11 +25,11 @@ public class HistoryDataActivity extends AppCompatActivity {
 
     Button btnDate, btnGroup, btnClass;
 
-    private static final String HOST_HISTORY = "http://192.168.1.107:8081/history/";
+    private static final String HOST_HISTORY = "http://180.76.163.58:8081/history/";
 
-    String[] groupArray = {"一号线", "二号线", "三号线"};
+    String[] groupArray = {"一号线", "二号线", "三号线", "四号线", "五号线", "六号线"};
 
-    String[] classArray = {"A", "B", "C", "D", "E"};
+    String[] classArray = {"A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M"};
 
     GridView gridViewHistory;
 
@@ -40,8 +40,11 @@ public class HistoryDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_data);
         btnDate = (Button) findViewById(R.id.btn_date);
+        btnDate.setText(CalendarUtils.getYesterday());
         btnGroup = (Button) findViewById(R.id.btn_group);
+        btnGroup.setText(groupArray[0]);
         btnClass = (Button) findViewById(R.id.btn_class);
+        btnClass.setText(classArray[0]);
         gridViewHistory = (GridView) findViewById(R.id.grid_view_history);
         adapter = new GridViewAdapter(this, R.layout.grid_view_cell);
         gridViewHistory.setAdapter(adapter);
@@ -86,8 +89,10 @@ public class HistoryDataActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Log.d(TAG, "onDateSet,year is " + year + ", month is " + (monthOfYear + 1) + ", day is " + dayOfMonth);
-                btnDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                String month = CalendarUtils.formatCalendar(monthOfYear + 1);
+                String day = CalendarUtils.formatCalendar(dayOfMonth);
+                String date = year + "-" + month + "-" + day;
+                btnDate.setText(date);
             }
         }, CalendarUtils.getYear(), CalendarUtils.getMonth(), CalendarUtils.getDayOfMonth());
         datePickerDialog.show();
@@ -102,7 +107,6 @@ public class HistoryDataActivity extends AppCompatActivity {
                 .setItems(groupArray, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, "you cliced " + groupArray[which]);
                         btnGroup.setText(groupArray[which]);
                     }
                 })
@@ -118,7 +122,6 @@ public class HistoryDataActivity extends AppCompatActivity {
                 .setItems(classArray, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, "you cliced " + classArray[which]);
                         btnClass.setText(classArray[which]);
                     }
                 })

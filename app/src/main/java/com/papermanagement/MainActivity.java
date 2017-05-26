@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private static final String HOST_FACTORY = "http://192.168.1.107:8081/factory/";
-    private static final String HOST_GROUPS = "http://192.168.1.107:8081/factory/";
+    private static final String HOST_FACTORY = "http://180.76.163.58:8081/factory/";
+    private static final String HOST_GROUPS = "http://180.76.163.58:8081/factory/";
     //10.0.2.2
     //192.168.1.107
     //180.76.163.58
@@ -97,9 +97,6 @@ public class MainActivity extends AppCompatActivity {
         if (TextUtils.equals(factory, "empty")) {
             showInputDialog();
         } else {
-//            refreshTime = 0;
-//            refreshing = true;
-//            startRefreshRegular(factory, defaultGroup);
             fact = factory;
             readGroups(factory);
         }
