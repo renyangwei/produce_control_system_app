@@ -8,8 +8,8 @@ android {
         applicationId "com.papermanagement"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 3
-        versionName "0.0.2.1"
+        versionCode 6
+        versionName "0.0.2.4"
     }
     buildTypes {
         release {

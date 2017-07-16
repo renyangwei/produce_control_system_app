@@ -21,4 +21,22 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:onClick="onToHistory"
         android:gravity="start|center_vertical"/>
+
+    <Button
+        android:id="@+id/btn_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="订单信息"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:onClick="onToOrder"
+        android:gravity="start|center_vertical"/>
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="完工资料"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:onClick="onToFinish"
+        android:gravity="start|center_vertical"/>
 </LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_order_item">
+
+
+    <TextView
+        android:id="@+id/tv_khjc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="客户简称"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tv_finishtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="预计完工时间"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:src="@mipmap/ic_right_arrow"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="fitCenter"/>
+</RelativeLayout>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.papermanagement.HistoryDataActivity"
+    tools:context=".activity.HistoryDataActivity"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -20,9 +20,10 @@
             android:padding="10dp"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-            android:text="历史数据"/>
+            android:text="@string/history_data"/>
 
         <Button
+            android:id="@+id/btn_query"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/title_btn_background"
@@ -53,7 +54,7 @@
 
         <Button
             android:id="@+id/btn_group"
-            android:text="产线"
+            android:text="生产线"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/Widget.AppCompat.Button.Borderless"
