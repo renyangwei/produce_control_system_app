@@ -45,4 +45,5 @@ public class OrderBean implements Serializable {
     public void setOrderDataBen(String orderDataBen) {
         this.orderDataBen = orderDataBen;
     }
+
 }

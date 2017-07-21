@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.papermanagement.activity.OrderDetailActivity">
+    tools:context="com.papermanagement.activity.FinishDetailActivity">
 
     <RelativeLayout
         android:id="@+id/rl_1"
@@ -18,12 +18,12 @@
             android:padding="10dp"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-            android:text="@string/order_detail"/>
+            android:text="@string/finish_data_detail"/>
 
     </RelativeLayout>
 
     <GridView
-        android:id="@+id/grid_view_order_detail"
+        android:id="@+id/grid_view_finish_detail"
         android:layout_below="@+id/rl_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

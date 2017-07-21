@@ -1,9 +1,12 @@
 package com.papermanagement.bean;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * 订单信息
@@ -40,11 +43,11 @@ public class OrderDataBen implements Serializable {
 
     @SerializedName("ks")
     @Expose
-    private String ks;
+    private String ks;          //剖
 
     @SerializedName("finish_time")
     @Expose
-    private String finishTime;
+    private String finishTime;      //预计完工时间
 
     public String getMxbh() {
         return mxbh;
@@ -116,5 +119,37 @@ public class OrderDataBen implements Serializable {
 
     public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
+    }
+
+    public ArrayList<String> toList() {
+        ArrayList<String> list = new ArrayList<>();
+        if (!TextUtils.isEmpty(getMxbh())) {
+            list.add("订单号:" + getMxbh());
+        }
+        if (!TextUtils.isEmpty(getKhjc())) {
+            list.add("客户简称:" + getKhjc());
+        }
+        if (!TextUtils.isEmpty(getZbdh())) {
+            list.add("材质:" + getZbdh());
+        }
+        if (!TextUtils.isEmpty(getKlzhdh())) {
+            list.add("楞别:" + getKlzhdh());
+        }
+        if (!TextUtils.isEmpty(getXdzd())) {
+            list.add("纸度:" + getXdzd());
+        }
+        if (!TextUtils.isEmpty(getDdsl())) {
+            list.add("排产数量:" + getDdsl());
+        }
+        if (!TextUtils.isEmpty(getZbcd())) {
+            list.add("切长:" + getZbcd());
+        }
+        if (!TextUtils.isEmpty(getKs())) {
+            list.add("剖:" + getKs());
+        }
+        if (!TextUtils.isEmpty(getFinishTime())) {
+            list.add("预计完工:" + getFinishTime());
+        }
+        return list;
     }
 }

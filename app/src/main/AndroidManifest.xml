@@ -14,8 +14,7 @@
             android:name=".activity.LoginActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".activity.RealTimeDateActivity"
-            android:screenOrientation="landscape">
+            android:name=".activity.RealTimeDateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,15 +22,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.HistoryDataActivity"
-            android:screenOrientation="landscape" />
+            android:name=".activity.HistoryDataActivity"/>
         <activity
-            android:name=".activity.OrderActivity"
-            android:screenOrientation="landscape" />
+            android:name=".activity.OrderActivity"/>
         <activity
-            android:name=".activity.FinishActivity"
-            android:screenOrientation="landscape" />
-        <activity android:name=".activity.OrderDetailActivity"></activity>
+            android:name=".activity.FinishActivity"/>
+        <activity
+            android:name=".activity.OrderDetailActivity"/>
+        <activity
+            android:name=".activity.FinishDetailActivity" />
     </application>
 
 </manifest>

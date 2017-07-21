@@ -1,7 +1,6 @@
 package com.papermanagement.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.papermanagement.R;
-import com.papermanagement.activity.OrderDetailActivity;
 import com.papermanagement.bean.OrderBean;
 import com.papermanagement.bean.OrderDataBen;
 
@@ -19,6 +17,12 @@ import com.papermanagement.bean.OrderDataBen;
  * 订单适配
  */
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
+
+    public interface OnItemClickListner {
+        void setOnItemClickListner(int position, OrderDataBen orderDataBen);
+    }
+
+    private OnItemClickListner itemClickListner;
 
     private Context mContext;
 
@@ -40,19 +44,23 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
+        String json = mOrders[position].getOrderDataBen();
+        Gson gson = new Gson();
+        final OrderDataBen orderDataBen = gson.fromJson(json, OrderDataBen.class);
+        holder.tvKhjc.setText(orderDataBen.getKhjc());
+        holder.tvFinishTime.setText(orderDataBen.getFinishTime());
         holder.rlOrderItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, OrderDetailActivity.class);
-                intent.putExtra("data", mOrders[position]);
-                mContext.startActivity(intent);
+                if (itemClickListner != null) {
+                    itemClickListner.setOnItemClickListner(position, orderDataBen);
+                }
             }
         });
-        String json = mOrders[position].getOrderDataBen();
-        Gson gson = new Gson();
-        OrderDataBen orderDataBen = gson.fromJson(json, OrderDataBen.class);
-        holder.tvKhjc.setText(orderDataBen.getKhjc());
-        holder.tvFinishTime.setText(orderDataBen.getFinishTime());
+    }
+
+    public void setOntItemClickListner(OnItemClickListner itemClickListner) {
+        this.itemClickListner = itemClickListner;
     }
 
     @Override

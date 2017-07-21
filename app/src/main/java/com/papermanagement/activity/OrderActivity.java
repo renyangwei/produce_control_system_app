@@ -1,5 +1,6 @@
 package com.papermanagement.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,8 @@ public class OrderActivity extends BaseActivity {
 
     private ProgressBar progressBar;
 
+    private OrderBean[] orders;
+
     private static final String HOST_ORDER = "http://gzzhizhuo.com:8081/order/";
 
     @Override
@@ -41,17 +44,32 @@ public class OrderActivity extends BaseActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderAdapter = new OrderAdapter(this);
+        orderAdapter.setOntItemClickListner(itemClickListner);
         recyclerView.setAdapter(orderAdapter);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         getData();
     }
+
+    OrderAdapter.OnItemClickListner itemClickListner = new OrderAdapter.OnItemClickListner() {
+        @Override
+        public void setOnItemClickListner(int position, OrderDataBen orderDataBen) {
+            Intent intent = new Intent(getBaseContext(), OrderDetailActivity.class);
+            intent.putExtra("data", orderDataBen);
+            startActivity(intent);
+        }
+    };
 
     private void getData() {
         progressBar.setVisibility(View.VISIBLE);
         String factory = DataUtils.readFactory(this);
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
-                        //这里建议：- Base URL: 总是以/结尾；- @Url: 不要以/开头
+                //这里建议：- Base URL: 总是以/结尾；- @Url: 不要以/开头
                 .baseUrl(HOST_ORDER)
                 .build();
         OrderService orderService = retrofit.create(OrderService.class);
@@ -60,7 +78,7 @@ public class OrderActivity extends BaseActivity {
             @Override
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {
                 progressBar.setVisibility(View.INVISIBLE);
-                OrderBean[] orders = response.body();
+                orders = response.body();
                 orderAdapter.setItem(orders);
             }
 

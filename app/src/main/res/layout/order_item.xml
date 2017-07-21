@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/rl_order_item">
-
+    android:layout_height="40dp"
+    android:id="@+id/rl_order_item"
+    android:background="@drawable/list_item_bg">
 
     <TextView
         android:id="@+id/tv_khjc"
@@ -12,7 +12,10 @@
         android:text="客户简称"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/tv_finishtime"
@@ -20,14 +23,24 @@
         android:layout_height="wrap_content"
         android:text="预计完工时间"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black"/>
 
     <ImageView
-        android:src="@mipmap/ic_right_arrow"
+        android:src="@mipmap/ic_next"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/colorDivider"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"/>
 </RelativeLayout>
