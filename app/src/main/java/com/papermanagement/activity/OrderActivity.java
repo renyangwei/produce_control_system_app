@@ -79,6 +79,9 @@ public class OrderActivity extends BaseActivity {
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {
                 progressBar.setVisibility(View.INVISIBLE);
                 orders = response.body();
+                for (OrderBean orderBean: orders) {
+                    Log.d("OrderActivity", orderBean.toString());
+                }
                 orderAdapter.setItem(orders);
             }
 

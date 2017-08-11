@@ -50,7 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onStartTime"
-            android:text="2017-07-19"
             android:textColor="@color/colorMain" />
 
         <TextView
@@ -65,7 +64,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onFinishTime"
-            android:text="2017-07-19"
             android:textColor="@color/colorMain" />
     </LinearLayout>
 

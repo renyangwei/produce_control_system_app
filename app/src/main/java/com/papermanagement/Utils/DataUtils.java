@@ -2,6 +2,7 @@ package com.papermanagement.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -55,6 +56,18 @@ public class DataUtils {
     public static String readFactory(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Factory", context.MODE_PRIVATE);
         return sharedPreferences.getString("factory", "empty");
+    }
+
+    /**
+     * 解析时间
+     * @param time 时间
+     * @return     解析后得时间
+     */
+    public static String parasTime(String time) {
+        if (TextUtils.isEmpty(time))
+            return "";
+        String finishTime = time.replace("T", " ");
+        return finishTime.substring(0, 19);
     }
 
 }

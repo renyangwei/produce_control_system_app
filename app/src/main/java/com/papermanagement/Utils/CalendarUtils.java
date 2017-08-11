@@ -32,6 +32,15 @@ public class CalendarUtils {
         return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
 
+
+    /**
+     * 获得今天的时间格式
+     * @return      今天
+     */
+    public static String getToDay() {
+        return getYear() + "-" + formatCalendar(getMonth() + 1) + "-" +getDayOfMonth();
+    }
+
     /**
      * 获得昨天
      * @return 昨天日期

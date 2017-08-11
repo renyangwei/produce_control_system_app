@@ -1,52 +1,54 @@
 package com.papermanagement.bean;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.papermanagement.Utils.DataUtils;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * 完工资料
  */
 
-public class FinishTimeBean {
+public class FinishTimeBean implements Serializable {
 
-    @SerializedName("mxbh")
+    @SerializedName("Mxbh")
     @Expose
     private String mxbh;        //订单号
 
-    @SerializedName("khjc")
+    @SerializedName("Khjc")
     @Expose
     private String khjc;        //客户简称
 
-    @SerializedName("zbdh")
+    @SerializedName("Zbdh")
     @Expose
     private String zbdh;        //材质
 
-    @SerializedName("zbkd")
+    @SerializedName("Zbkd")
     @Expose
     private String zbkd;        //纸板宽
 
-    @SerializedName("hgpsl")
+    @SerializedName("Hgpsl")
     @Expose
     private String hgpsl;       //合格数
 
-    @SerializedName("blpsl")
+    @SerializedName("Blpsl")
     @Expose
     private String blpsl;       //不良数
 
-    @SerializedName("pcsl")
+    @SerializedName("Pcsl")
     @Expose
     private String pcsl;        //排产数
 
-    @SerializedName("zbcd")
+    @SerializedName("Zbcd")
     @Expose
     private String zbcd;        //切长
 
-    @SerializedName("start_time ")
-    @Expose
     private String startTime;   //开始时间
 
-    @SerializedName("finish_time")
-    @Expose
     private String finishTime;   //完工时间
 
     public String getMxbh() {
@@ -127,5 +129,40 @@ public class FinishTimeBean {
 
     public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
+    }
+
+    public ArrayList<String> toList() {
+        ArrayList<String> list = new ArrayList<>();
+        if (!TextUtils.isEmpty(getMxbh())) {
+            list.add("订单号:" + getMxbh());
+        }
+        if (!TextUtils.isEmpty(getKhjc())) {
+            list.add("客户简称:" + getKhjc());
+        }
+        if (!TextUtils.isEmpty(getZbdh())) {
+            list.add("材质:" + getZbdh());
+        }
+        if (!TextUtils.isEmpty(getZbkd())) {
+            list.add("纸板宽:" + getZbkd());
+        }
+        if (!TextUtils.isEmpty(getHgpsl())) {
+            list.add("合格数:" + getHgpsl());
+        }
+        if (!TextUtils.isEmpty(getBlpsl())) {
+            list.add("不良数:" + getBlpsl());
+        }
+        if (!TextUtils.isEmpty(getPcsl())) {
+            list.add("排产数:" + getPcsl());
+        }
+        if (!TextUtils.isEmpty(getZbcd())) {
+            list.add("切长:" + getZbcd());
+        }
+        if (!TextUtils.isEmpty(getStartTime())) {
+            list.add("开始时间:" + getStartTime());
+        }
+        if (!TextUtils.isEmpty(getFinishTime())) {
+            list.add("完工时间:" + getFinishTime());
+        }
+        return list;
     }
 }

@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.papermanagement.Utils.DataUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,39 +14,39 @@ import java.util.ArrayList;
  */
 public class OrderDataBen implements Serializable {
 
-    @SerializedName("mxbh")
+    @SerializedName("Mxbh")
     @Expose
     private String mxbh;        //订单号
 
-    @SerializedName("khjc")
+    @SerializedName("Khjc")
     @Expose
     private String khjc;        //客户简称
 
-    @SerializedName("zbdh")
+    @SerializedName("Zbdh")
     @Expose
     private String zbdh;        //材质
 
-    @SerializedName("klzhdh")
+    @SerializedName("Klzhdh")
     @Expose
     private String klzhdh;      //楞别
 
-    @SerializedName("xdzd")
+    @SerializedName("Xdzd")
     @Expose
     private String xdzd;        //纸度
 
-    @SerializedName("ddsl-tlsl")
+    @SerializedName("Pscl")
     @Expose
     private String ddsl;        //排产数量
 
-    @SerializedName("zbcd")
+    @SerializedName("Zbcd")
     @Expose
     private String zbcd;        //切长
 
-    @SerializedName("ks")
+    @SerializedName("Ks")
     @Expose
     private String ks;          //剖
 
-    @SerializedName("finish_time")
+    @SerializedName("FinishTime")
     @Expose
     private String finishTime;      //预计完工时间
 
@@ -114,7 +115,7 @@ public class OrderDataBen implements Serializable {
     }
 
     public String getFinishTime() {
-        return finishTime;
+        return DataUtils.parasTime(finishTime);
     }
 
     public void setFinishTime(String finishTime) {
