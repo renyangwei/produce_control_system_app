@@ -76,10 +76,10 @@ public class GridViewAdapter extends ArrayAdapter<String> {
         viewHolder.tvCell.setText(getItem(position));
         if (position / 4 % 2 == 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                viewHolder.tvCell.setBackgroundColor(mContext.getColor(R.color.colorGridViewCell_1));
+                viewHolder.tvCell.setBackgroundColor(mContext.getColor(R.color.colorGridViewCellLightBlue));
             } else {
                 viewHolder.tvCell.setBackgroundColor(
-                        mContext.getResources().getColor(R.color.colorGridViewCell_1));
+                        mContext.getResources().getColor(R.color.colorGridViewCellLightBlue));
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

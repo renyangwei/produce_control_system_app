@@ -3,9 +3,8 @@ package com.papermanagement.activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,17 +13,17 @@ import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.papermanagement.R;
 import com.papermanagement.Utils.CalendarUtils;
 import com.papermanagement.Utils.DataUtils;
-import com.papermanagement.response.ForceDataResponse;
-import com.papermanagement.httpurl.ForceService;
 import com.papermanagement.adapter.GridViewAdapter;
 import com.papermanagement.bean.HistoryBean;
+import com.papermanagement.httpurl.ForceService;
 import com.papermanagement.httpurl.HistoryClassService;
 import com.papermanagement.httpurl.HistoryGroupService;
 import com.papermanagement.httpurl.HistoryService;
 import com.papermanagement.httpurl.LastHistoryService;
-import com.papermanagement.R;
+import com.papermanagement.response.ForceDataResponse;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -167,9 +166,9 @@ public class HistoryDataActivity extends BaseActivity {
      * 获得最近一次的历史数据
      */
     private void queryLastHistory() {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("查询中...");
-        progressDialog.show();
+//        final ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("查询中...");
+//        progressDialog.show();
         String factory = DataUtils.readFactory(this);
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
@@ -197,12 +196,12 @@ public class HistoryDataActivity extends BaseActivity {
                     clazz = "A";
                 }
                 btnClass.setText(clazz);
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<HistoryBean> call, Throwable t) {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 Log.e(TAG, t.toString());
                 Toast.makeText(HistoryDataActivity.this, "出错了，请重试", Toast.LENGTH_SHORT).show();
             }

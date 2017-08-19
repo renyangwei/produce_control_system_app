@@ -2,6 +2,7 @@ package com.papermanagement.activity;
 
 import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.papermanagement.R;
 import com.papermanagement.adapter.GridViewAdapter;
@@ -20,5 +21,10 @@ public class OrderDetailActivity extends BaseActivity {
         GridViewAdapter adapter = new GridViewAdapter(this, R.layout.grid_view_cell);
         gridViewOrderDetail.setAdapter(adapter);
         adapter.setData(orderDataBen.toList());
+
+        TextView tvSm2 = (TextView) findViewById(R.id.tv_sm2);
+        tvSm2.setText("压线:" + orderDataBen.getSm2());
+        TextView tvDdsm = (TextView) findViewById(R.id.tv_ddsm);
+        tvDdsm.setText("说明:" + orderDataBen.getDdms());
     }
 }

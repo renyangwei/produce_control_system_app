@@ -22,21 +22,54 @@
 
     </RelativeLayout>
 
-    <GridView
-        android:id="@+id/grid_view_order_detail"
-        android:layout_below="@+id/rl_1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_1"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:background="@android:color/white"
-        android:horizontalSpacing="1dp"
-        android:numColumns="4"
-        android:padding="1dp"
-        android:verticalSpacing="1dp"
-        android:scrollbarStyle="@null"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/grid_view_order_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:horizontalSpacing="1dp"
+            android:numColumns="4"
+            android:padding="1dp"
+            android:verticalSpacing="1dp"
+            android:scrollbarStyle="@null" />
+
+        <TextView
+            android:id="@+id/tv_sm2"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/light_blue_bg"
+            android:textSize="14sp"
+            android:gravity="start|center_vertical"
+            android:layout_marginTop="-1dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"/>
+        <TextView
+            android:id="@+id/tv_ddsm"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/white_bg"
+            android:textSize="14sp"
+            android:gravity="start|center_vertical"
+            android:layout_marginTop="-1dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:paddingRight="16dp"
+            android:paddingEnd="16dp"/>
+    </LinearLayout>
+
+
 
 </RelativeLayout>

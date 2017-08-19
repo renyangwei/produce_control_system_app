@@ -7,7 +7,7 @@
     <color name="colorMain">#2179ff</color>
     <color name="colorActivityBackground">#e6e6e6</color>
     <color name="colorGridViewCell">#f4f4f4</color>
-    <color name="colorGridViewCell_1">#e0edfe</color>
+    <color name="colorGridViewCellLightBlue">#e0edfe</color>
     <color name="colorGridViewBackground">#949494</color>
     <color name="colorDivider">#d8d8d8</color>
     <color name="colorPress">#d8d8d1</color>

@@ -47,7 +47,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
         String json = mOrders[position].getOrderDataBen();
         Gson gson = new Gson();
         final OrderDataBen orderDataBen = gson.fromJson(json, OrderDataBen.class);
+//        holder.tvScxh.setText(orderDataBen.getScxh());
+        holder.tvScxh.setText("1234");
         holder.tvKhjc.setText(orderDataBen.getKhjc());
+        holder.tvMxbh.setText(orderDataBen.getMxbh());
         holder.tvFinishTime.setText(orderDataBen.getFinishTime());
         holder.rlOrderItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,14 +78,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
 
         private RelativeLayout rlOrderItem;
 
+        private TextView tvScxh;    //序号
+
         private TextView tvKhjc;    //客户简称
+
+        private TextView tvMxbh;    //订单编号
 
         private TextView tvFinishTime;  //预计完成时间
 
         public Holder(View itemView) {
             super(itemView);
             rlOrderItem = (RelativeLayout) itemView.findViewById(R.id.rl_order_item);
+            tvScxh = (TextView) itemView.findViewById(R.id.tv_scxh);
             tvKhjc = (TextView) itemView.findViewById(R.id.tv_khjc);
+            tvMxbh = (TextView) itemView.findViewById(R.id.tv_mxbh);
             tvFinishTime = (TextView) itemView.findViewById(R.id.tv_finishtime);
         }
     }
