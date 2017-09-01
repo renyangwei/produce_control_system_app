@@ -15,11 +15,11 @@ public class OrderBean implements Serializable {
     @Expose
     private int Id;
 
-    @SerializedName("cname")
+    @SerializedName("Cname")
     @Expose
     private String cName;
 
-    @SerializedName("data")
+    @SerializedName("Data")
     @Expose
     private String orderDataBen;
 

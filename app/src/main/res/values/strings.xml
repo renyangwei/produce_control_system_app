@@ -25,4 +25,11 @@
 
     <string name="finish_data">完工资料</string>
     <string name="finish_data_detail">完工资料详情</string>
+
+    <string name="search_order">搜索订单</string>
+    <string name="search_hint">请输入订单号、客户名称或者切长</string>
+
+    <string name="group">一号线</string>
+    <string name="search">搜索</string>
+    <string name="search_order_result">订单搜索结果</string>
 </resources>

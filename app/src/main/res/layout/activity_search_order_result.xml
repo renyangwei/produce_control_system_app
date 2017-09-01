@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.papermanagement.activity.OrderActivity">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/rl_1"
@@ -18,17 +16,7 @@
             android:padding="10dp"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-            android:text="@string/order"/>
-
-        <ImageButton
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:src="@drawable/search"
-            android:scaleType="fitCenter"
-            android:onClick="onSearch"/>
+            android:text="@string/search_order_result"/>
 
     </RelativeLayout>
 
@@ -82,13 +70,4 @@
         android:layout_below="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        style="@style/BlueProgressBar"
-        android:visibility="invisible"/>
-
 </RelativeLayout>
