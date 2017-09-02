@@ -1,6 +1,7 @@
 package com.papermanagement.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,11 +45,21 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
+        if (position == 0) {
+            holder.tvScxh.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+            holder.tvKhjc.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+            holder.tvMxbh.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+            holder.tvFinishTime.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+        } else {
+            holder.tvScxh.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
+            holder.tvKhjc.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
+            holder.tvMxbh.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
+            holder.tvFinishTime.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
+        }
         String json = mOrders[position].getOrderDataBen();
         Gson gson = new Gson();
         final OrderDataBen orderDataBen = gson.fromJson(json, OrderDataBen.class);
-//        holder.tvScxh.setText(orderDataBen.getScxh());
-        holder.tvScxh.setText("1234");
+        holder.tvScxh.setText(orderDataBen.getScxh());
         holder.tvKhjc.setText(orderDataBen.getKhjc());
         holder.tvMxbh.setText(orderDataBen.getMxbh());
         holder.tvFinishTime.setText(orderDataBen.getFinishTime());

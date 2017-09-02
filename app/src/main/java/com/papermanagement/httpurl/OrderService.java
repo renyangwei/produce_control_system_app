@@ -12,5 +12,5 @@ import retrofit2.http.Query;
  */
 public interface OrderService {
     @GET("/order")
-    Call<OrderBean[]> getOrders(@Query("factory") String factory);
+    Call<OrderBean[]> getOrders(@Query("factory") String factory, @Query("group") String group);
 }

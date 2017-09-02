@@ -27,12 +27,13 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/title_btn_background"
-            android:text="@string/query"
+            android:text="@string/menu_option_refresh"
             android:textColor="@android:color/white"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:onClick="onQuery"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="visible"/>
 
     </RelativeLayout>
 
@@ -41,7 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/rl">
+        android:layout_below="@+id/rl"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btn_start_time"
@@ -81,18 +83,40 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
 
-        <TextView
-            android:text="客户简称"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:text="完工时间"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textColor="@android:color/black"/>
+            <TextView
+                android:text="订单编号"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="客户"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="开始时间"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="完工时间"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
     </RelativeLayout>
 
     <ImageView

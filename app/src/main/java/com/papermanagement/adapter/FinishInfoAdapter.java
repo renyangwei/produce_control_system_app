@@ -44,7 +44,7 @@ public class FinishInfoAdapter extends RecyclerView.Adapter<FinishInfoAdapter.Ho
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new Holder(LayoutInflater.from(mContext).inflate(R.layout.order_item, parent, false));
+        return new Holder(LayoutInflater.from(mContext).inflate(R.layout.finish_info_item, parent, false));
     }
 
     @Override
@@ -52,7 +52,9 @@ public class FinishInfoAdapter extends RecyclerView.Adapter<FinishInfoAdapter.Ho
         String json = mOrders[position].getOrderDataBen();
         Gson gson = new Gson();
         final FinishTimeBean finishTimeBean = gson.fromJson(json, FinishTimeBean.class);
+        holder.tvMxbh.setText(finishTimeBean.getMxbh());
         holder.tvKhjc.setText(finishTimeBean.getKhjc());
+        holder.tvStartTime.setText(mOrders[position].getStartTime());
         holder.tvFinishTime.setText(mOrders[position].getFinishTime());
         holder.rlOrderItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,15 +82,21 @@ public class FinishInfoAdapter extends RecyclerView.Adapter<FinishInfoAdapter.Ho
 
         private RelativeLayout rlOrderItem;
 
-        private TextView tvKhjc;    //客户简称
+        private TextView tvMxbh;    //订单编号
 
-        private TextView tvFinishTime;  //预计完成时间
+        private TextView tvKhjc;    //客户
+
+        private TextView tvStartTime; //开始时间
+
+        private TextView tvFinishTime;  //完成时间
 
         public Holder(View itemView) {
             super(itemView);
             rlOrderItem = (RelativeLayout) itemView.findViewById(R.id.rl_order_item);
+            tvMxbh = (TextView) itemView.findViewById(R.id.tv_mxbh);
             tvKhjc = (TextView) itemView.findViewById(R.id.tv_khjc);
-            tvFinishTime = (TextView) itemView.findViewById(R.id.tv_finishtime);
+            tvStartTime = (TextView) itemView.findViewById(R.id.tv_start_time);
+            tvFinishTime = (TextView) itemView.findViewById(R.id.tv_finish_time);
         }
     }
 }

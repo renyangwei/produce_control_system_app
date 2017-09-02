@@ -12,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface FinishInfoService {
     @GET("/finish_info")
-    Call<OrderBean[]> getFinishInfo(@Query("factory") String factory, @Query("start_time") String startTime, @Query("finish_time") String finishTime);
+    Call<OrderBean[]> getFinishInfo(@Query("factory") String factory, @Query("start_time") String startTime, @Query("finish_time") String finishTime, @Query("group") String group);
 }

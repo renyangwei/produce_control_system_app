@@ -70,4 +70,13 @@ public class DataUtils {
         return finishTime.substring(0, 19);
     }
 
+    /**
+     * 判断该字符串是否为空
+     * @param s 字符串
+     * @return  如果为空则返回""
+     */
+    public static String isEmpty(String s) {
+        return (TextUtils.isEmpty(s)?"":s);
+    }
+
 }

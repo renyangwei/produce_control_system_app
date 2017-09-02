@@ -15,15 +15,15 @@ public class OrderBean implements Serializable {
     @Expose
     private int Id;
 
-    @SerializedName("cname")
+    @SerializedName("Cname")
     @Expose
     private String cName;
 
-    @SerializedName("data")
+    @SerializedName("Data")
     @Expose
     private String orderDataBen;
 
-    @SerializedName("StartTime ")
+    @SerializedName("StartTime")
     @Expose
     private String startTime;   //开始时间
 
@@ -72,7 +72,8 @@ public class OrderBean implements Serializable {
     }
 
     public String toString() {
-        return "id:" + getId() + ",cname:" + getcName() + ",data" + getOrderDataBen();
+        return "id:" + getId() + ",cname:" + getcName() + ",data" + getOrderDataBen()
+                + ",startTime:" + getStartTime() + ",finishTime:" + getFinishTime();
     }
 
 }

@@ -2,7 +2,6 @@ package com.papermanagement.bean;
 
 import android.text.TextUtils;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.papermanagement.Utils.DataUtils;
 
@@ -10,159 +9,229 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 完工资料
+ *  完工信息
  */
-
-public class FinishTimeBean implements Serializable {
+public class FinishTimeBean implements Serializable{
 
     @SerializedName("Mxbh")
-    @Expose
-    private String mxbh;        //订单号
+    private String Mxbh;
 
     @SerializedName("Khjc")
-    @Expose
-    private String khjc;        //客户简称
+    private String Khjc;
 
-    @SerializedName("Zbdh")
-    @Expose
-    private String zbdh;        //材质
+    @SerializedName("Ms")
+    private String Ms;
 
-    @SerializedName("Zbkd")
-    @Expose
-    private String zbkd;        //纸板宽
+    @SerializedName("Bzbh")
+    private String Bzbh;
 
-    @SerializedName("Hgpsl")
-    @Expose
-    private String hgpsl;       //合格数
+    @SerializedName("Zbmd")
+    private String Zbmd;
 
-    @SerializedName("Blpsl")
-    @Expose
-    private String blpsl;       //不良数
+    @SerializedName("Klzhdh")
+    private String Klzhdh;
+
+    @SerializedName("Zd")
+    private String Zd;
 
     @SerializedName("Pcsl")
-    @Expose
-    private String pcsl;        //排产数
+    private String Pcsl;
 
-    @SerializedName("Zbcd")
-    @Expose
-    private String zbcd;        //切长
+    @SerializedName("Hgpsl")
+    private String Hgpsl;
 
-    private String startTime;   //开始时间
+    @SerializedName("Blpsl")
+    private String Blpsl;
 
-    private String finishTime;   //完工时间
+    @SerializedName("Xbmm")
+    private String Xbmm;
 
+    @SerializedName("Zbcd2")
+    private String Zbcd2;
+
+    @SerializedName("Ks")
+    private String Ks;
+
+    @SerializedName("Js")
+    private String Js;
+
+    @SerializedName("StopTime")
+    private String StopTime;
+
+    @SerializedName("StopSpec")
+    private String StopSpec;
+
+    @SerializedName("Ys")
+    private String Ys;
+
+    @SerializedName("Shl")
+    private String Shl;
+
+    private String StartTime;
+
+    private String FinishTime;
+
+
+    public void setMxbh(String Mxbh) {
+        this.Mxbh = Mxbh;
+    }
     public String getMxbh() {
-        return mxbh;
+        return Mxbh;
     }
 
-    public void setMxbh(String mxbh) {
-        this.mxbh = mxbh;
+    public void setKhjc(String Khjc) {
+        this.Khjc = Khjc;
     }
-
     public String getKhjc() {
-        return khjc;
+        return Khjc;
     }
 
-    public void setKhjc(String khjc) {
-        this.khjc = khjc;
+    public void setMs(String Ms) {
+        this.Ms = Ms;
+    }
+    public String getMs() {
+        return Ms;
     }
 
-    public String getZbdh() {
-        return zbdh;
+    public void setBzbh(String Bzbh) {
+        this.Bzbh = Bzbh;
+    }
+    public String getBzbh() {
+        return Bzbh;
     }
 
-    public void setZbdh(String zbdh) {
-        this.zbdh = zbdh;
+    public void setZbmd(String Zbmd) {
+        this.Zbmd = Zbmd;
+    }
+    public String getZbmd() {
+        return Zbmd;
     }
 
-    public String getZbkd() {
-        return zbkd;
+    public void setKlzhdh(String Klzhdh) {
+        this.Klzhdh = Klzhdh;
+    }
+    public String getKlzhdh() {
+        return Klzhdh;
     }
 
-    public void setZbkd(String zbkd) {
-        this.zbkd = zbkd;
+    public void setZd(String Zd) {
+        this.Zd = Zd;
+    }
+    public String getZd() {
+        return Zd;
     }
 
-    public String getHgpsl() {
-        return hgpsl;
+    public void setPcsl(String Pcsl) {
+        this.Pcsl = Pcsl;
     }
-
-    public void setHgpsl(String hgpsl) {
-        this.hgpsl = hgpsl;
-    }
-
-    public String getBlpsl() {
-        return blpsl;
-    }
-
-    public void setBlpsl(String blpsl) {
-        this.blpsl = blpsl;
-    }
-
     public String getPcsl() {
-        return pcsl;
+        return Pcsl;
     }
 
-    public void setPcsl(String pcsl) {
-        this.pcsl = pcsl;
+    public void setHgpsl(String Hgpsl) {
+        this.Hgpsl = Hgpsl;
+    }
+    public String getHgpsl() {
+        return Hgpsl;
     }
 
-    public String getZbcd() {
-        return zbcd;
+    public void setBlpsl(String Blpsl) {
+        this.Blpsl = Blpsl;
+    }
+    public String getBlpsl() {
+        return Blpsl;
     }
 
-    public void setZbcd(String zbcd) {
-        this.zbcd = zbcd;
+    public void setXbmm(String Xbmm) {
+        this.Xbmm = Xbmm;
+    }
+    public String getXbmm() {
+        return Xbmm;
+    }
+
+    public void setZbcd2(String Zbcd2) {
+        this.Zbcd2 = Zbcd2;
+    }
+    public String getZbcd2() {
+        return Zbcd2;
+    }
+
+    public void setKs(String Ks) {
+        this.Ks = Ks;
+    }
+    public String getKs() {
+        return Ks;
+    }
+
+    public void setJs(String Js) {
+        this.Js = Js;
+    }
+    public String getJs() {
+        return Js;
+    }
+
+    public void setStopTime(String StopTime) {
+        this.StopTime = StopTime;
+    }
+    public String getStopTime() {
+        return StopTime;
+    }
+
+    public void setStopSpec(String StopSpec) {
+        this.StopSpec = StopSpec;
+    }
+    public String getStopSpec() {
+        return StopSpec;
+    }
+
+    public void setYs(String Ys) {
+        this.Ys = Ys;
+    }
+    public String getYs() {
+        return Ys;
+    }
+
+    public void setShl(String Shl) {
+        this.Shl = Shl;
+    }
+    public String getShl() {
+        return Shl;
     }
 
     public String getStartTime() {
-        return startTime;
+        return StartTime;
     }
 
     public void setStartTime(String startTime) {
-        this.startTime = startTime;
+        StartTime = startTime;
     }
 
     public String getFinishTime() {
-        return finishTime;
+        return FinishTime;
     }
 
     public void setFinishTime(String finishTime) {
-        this.finishTime = finishTime;
+        FinishTime = finishTime;
     }
 
     public ArrayList<String> toList() {
         ArrayList<String> list = new ArrayList<>();
-        if (!TextUtils.isEmpty(getMxbh())) {
-            list.add("订单号:" + getMxbh());
-        }
-        if (!TextUtils.isEmpty(getKhjc())) {
-            list.add("客户简称:" + getKhjc());
-        }
-        if (!TextUtils.isEmpty(getZbdh())) {
-            list.add("材质:" + getZbdh());
-        }
-        if (!TextUtils.isEmpty(getZbkd())) {
-            list.add("纸板宽:" + getZbkd());
-        }
-        if (!TextUtils.isEmpty(getHgpsl())) {
-            list.add("合格数:" + getHgpsl());
-        }
-        if (!TextUtils.isEmpty(getBlpsl())) {
-            list.add("不良数:" + getBlpsl());
-        }
-        if (!TextUtils.isEmpty(getPcsl())) {
-            list.add("排产数:" + getPcsl());
-        }
-        if (!TextUtils.isEmpty(getZbcd())) {
-            list.add("切长:" + getZbcd());
-        }
-        if (!TextUtils.isEmpty(getStartTime())) {
-            list.add("开始时间:" + getStartTime());
-        }
-        if (!TextUtils.isEmpty(getFinishTime())) {
-            list.add("完工时间:" + getFinishTime());
-        }
+        list.add("班组:" + DataUtils.isEmpty(getBzbh()));
+        list.add("客户:" + DataUtils.isEmpty(getKhjc()));
+        list.add("材质:" + DataUtils.isEmpty(getZbmd()));
+        list.add("楞别:" + DataUtils.isEmpty(getKlzhdh()));
+        list.add("门幅:" + DataUtils.isEmpty(getZd()));
+        list.add("排产:" + DataUtils.isEmpty(getPcsl()));
+        list.add("合格:" + DataUtils.isEmpty(getHgpsl()));
+        list.add("不良:" + DataUtils.isEmpty(getBlpsl()));
+        list.add("修边:" + DataUtils.isEmpty(getXbmm()));
+        list.add("切长:" + DataUtils.isEmpty(getZbcd2()));
+        list.add("板宽:" + DataUtils.isEmpty(getKs()));
+        list.add("机速:" + DataUtils.isEmpty(getJs()));
+        list.add("停时:" + DataUtils.isEmpty(getStopTime()));
+        list.add("停次:" + DataUtils.isEmpty(getStopSpec()));
+        list.add("用时:" + DataUtils.isEmpty(getYs()));
+        list.add("损耗:" + DataUtils.isEmpty(getShl()));
         return list;
     }
 }

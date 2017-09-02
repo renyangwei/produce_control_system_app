@@ -203,7 +203,7 @@ public class OrderDataBen implements Serializable {
     }
 
     public String getMs() {
-        return ms;
+        return ms.split("\\.")[0];
     }
 
     public void setMs(String ms) {
@@ -220,40 +220,14 @@ public class OrderDataBen implements Serializable {
 
     public ArrayList<String> toList() {
         ArrayList<String> list = new ArrayList<>();
-//        if (!TextUtils.isEmpty(getScxh())) {
-//            list.add("序号:" + getScxh());
-//        }
-        if (!TextUtils.isEmpty(getMxbh())) {
-            list.add("订单编号:" + getMxbh());
-        }
-//        if (!TextUtils.isEmpty(getKhjc())) {
-//            list.add("客户简称:" + getKhjc());
-//        }
-        if (!TextUtils.isEmpty(getZbdh())) {
-            list.add("材质:" + getZbdh());
-        }
-        if (!TextUtils.isEmpty(getKlzhdh())) {
-            list.add("楞别:" + getKlzhdh());
-        }
-        if (!TextUtils.isEmpty(getZd())) {
-            list.add("纸度:" + getZd());
-        }
-
-        if (!TextUtils.isEmpty(getPscl())) {
-            list.add("排产数量:" + getPscl());
-        }
-        if (!TextUtils.isEmpty(getZbcd2())) {
-            list.add("切长:" + getZbcd2());
-        }
-        if (!TextUtils.isEmpty(getMs())) {
-            list.add("米数" + getMs());
-        }
-        if (!TextUtils.isEmpty(getKs())) {
-            list.add("剖:" + getKs());
-        }
-//        if (!TextUtils.isEmpty(getFinishTime())) {
-//            list.add("预计完工:" + getFinishTime());
-//        }
+        list.add("订单编号:" + DataUtils.isEmpty(getMxbh()));
+        list.add("材质:" + DataUtils.isEmpty(getZbdh()));
+        list.add("楞别:" + DataUtils.isEmpty(getKlzhdh()));
+        list.add("纸度:" + DataUtils.isEmpty(getZd()));
+        list.add("排产数量:" + DataUtils.isEmpty(getPscl()));
+        list.add("切长:" + DataUtils.isEmpty(getZbcd2()));
+        list.add("米数:" + DataUtils.isEmpty(getMs()));
+        list.add("剖:" + DataUtils.isEmpty(getKs()));
         return list;
     }
 }

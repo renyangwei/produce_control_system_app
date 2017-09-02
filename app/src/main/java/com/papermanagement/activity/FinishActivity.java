@@ -72,6 +72,12 @@ public class FinishActivity extends BaseActivity {
         }
     };
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        queryFinishInfo();
+    }
+
     /**
      * 选择完成时间
      * @param view 视图
@@ -146,7 +152,7 @@ public class FinishActivity extends BaseActivity {
                 .baseUrl(HOST_FINISH_INFO)
                 .build();
         FinishInfoService finishInfoService = retrofit.create(FinishInfoService.class);
-        Call<OrderBean[]> call = finishInfoService.getFinishInfo(factory, startTime, finishTime);
+        Call<OrderBean[]> call = finishInfoService.getFinishInfo(factory, startTime, finishTime, "一号线");
         call.enqueue(new Callback<OrderBean[]>() {
             @Override
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {

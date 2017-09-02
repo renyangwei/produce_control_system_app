@@ -64,6 +64,10 @@ public class OrderActivity extends BaseActivity {
         }
     };
 
+    public void onRefreshOrder(View view) {
+        getData();
+    }
+
     private void getData() {
         progressBar.setVisibility(View.VISIBLE);
         String factory = DataUtils.readFactory(this);
@@ -73,7 +77,7 @@ public class OrderActivity extends BaseActivity {
                 .baseUrl(HOST_ORDER)
                 .build();
         OrderService orderService = retrofit.create(OrderService.class);
-        Call<OrderBean[]> call = orderService.getOrders(factory);
+        Call<OrderBean[]> call = orderService.getOrders(factory, "一号线");
         call.enqueue(new Callback<OrderBean[]>() {
             @Override
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {

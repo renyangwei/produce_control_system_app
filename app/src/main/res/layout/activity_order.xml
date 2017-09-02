@@ -20,6 +20,17 @@
             android:textSize="14sp"
             android:text="@string/order"/>
 
+        <Button
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/menu_option_refresh"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@android:color/white"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="onRefreshOrder"/>
+
     </RelativeLayout>
 
 
