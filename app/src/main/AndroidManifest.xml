@@ -13,24 +13,20 @@
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.RealTimeDateActivity">
+        <activity android:name=".activity.RealTimeDateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.HistoryDataActivity"/>
-        <activity
-            android:name=".activity.OrderActivity"/>
-        <activity
-            android:name=".activity.FinishActivity"/>
-        <activity
-            android:name=".activity.OrderDetailActivity"/>
-        <activity
-            android:name=".activity.FinishDetailActivity" />
+        <activity android:name=".activity.HistoryDataActivity" />
+        <activity android:name=".activity.OrderActivity" />
+        <activity android:name=".activity.FinishActivity" />
+        <activity android:name=".activity.OrderDetailActivity" />
+        <activity android:name=".activity.FinishDetailActivity" />
+        <activity android:name=".activity.SearchOrderActivity" />
+        <activity android:name=".activity.SearchOrderResultActivity"></activity>
     </application>
 
 </manifest>

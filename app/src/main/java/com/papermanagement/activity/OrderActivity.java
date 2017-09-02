@@ -52,7 +52,15 @@ public class OrderActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getData();
+//        getData();
+    }
+
+    /**
+     * 搜索按钮
+     * @param view 视图
+     */
+    public void onSearch(View view) {
+        startActivity(new Intent(this, SearchOrderActivity.class));
     }
 
     OrderAdapter.OnItemClickListner itemClickListner = new OrderAdapter.OnItemClickListner() {
