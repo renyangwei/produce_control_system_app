@@ -17,10 +17,8 @@ import com.papermanagement.R;
 import com.papermanagement.Utils.CalendarUtils;
 import com.papermanagement.Utils.DataUtils;
 import com.papermanagement.adapter.FinishInfoAdapter;
-import com.papermanagement.adapter.OrderAdapter;
 import com.papermanagement.bean.FinishTimeBean;
 import com.papermanagement.bean.OrderBean;
-import com.papermanagement.bean.OrderDataBen;
 import com.papermanagement.httpurl.FinishInfoService;
 
 import retrofit2.Call;
@@ -44,7 +42,7 @@ public class FinishActivity extends BaseActivity {
 
     private ProgressBar progressBar;
 
-    private static final String HOST_FINISH_INFO = "http://192.168.0.111:8081/finish_info/";
+    private static final String HOST_FINISH_INFO = "http://gzzhizhuo.com:8081/finish_info/";
 
     private SwipeRefreshLayout swipeRefreshLayout;
 

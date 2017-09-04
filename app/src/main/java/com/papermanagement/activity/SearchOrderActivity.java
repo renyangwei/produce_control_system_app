@@ -39,7 +39,7 @@ public class SearchOrderActivity extends BaseActivity {
 
     private EditText etSearchData;
 
-    private static final String HOST_SEARCH_ORDER_REQUEST = "http://192.168.0.111:8081/";
+    private static final String HOST_SEARCH_ORDER_REQUEST = "http://gzzhizhuo.com:8081/";
 
     private static final String HOST_HISTORY = "http://gzzhizhuo.com:8081/history/";
 

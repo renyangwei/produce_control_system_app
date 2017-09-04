@@ -36,7 +36,7 @@ public class OrderActivity extends BaseActivity {
 
     private OrderBean[] orders;
 
-    private static final String HOST_ORDER = "http://192.168.0.111:8081/order/";
+    private static final String HOST_ORDER = "http://gzzhizhuo.com:8081/order/";
 
     private SwipeRefreshLayout swipeRefreshLayout;
 

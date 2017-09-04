@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -26,13 +25,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.papermanagement.R;
 import com.papermanagement.Utils.DataUtils;
 import com.papermanagement.adapter.GridViewAdapter;
 import com.papermanagement.bean.GroupBean;
-import com.papermanagement.httpurl.GroupService;
 import com.papermanagement.bean.PaperManageBean;
+import com.papermanagement.httpurl.GroupService;
 import com.papermanagement.httpurl.PaperService;
-import com.papermanagement.R;
 
 import java.util.ArrayList;
 
@@ -51,9 +50,6 @@ public class RealTimeDateActivity extends BaseActivity {
 
     private static final String HOST_FACTORY = "http://gzzhizhuo.com:8081/factory/";
     private static final String HOST_GROUPS = "http://gzzhizhuo.com:8081/factory/";
-    //10.0.2.2
-    //192.168.1.105
-    //180.76.163.58
 
     TextView tvFactory;
 

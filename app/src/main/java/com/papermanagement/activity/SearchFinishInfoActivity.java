@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.papermanagement.R;
 import com.papermanagement.Utils.CalendarUtils;
@@ -25,8 +24,8 @@ import com.papermanagement.Utils.DataUtils;
 import com.papermanagement.bean.HistoryBean;
 import com.papermanagement.bean.OrderBean;
 import com.papermanagement.httpurl.HistoryGroupService;
-import com.papermanagement.httpurl.SearchResultService;
 import com.papermanagement.httpurl.SearchRequestService;
+import com.papermanagement.httpurl.SearchResultService;
 import com.papermanagement.response.ForceDataResponse;
 
 import org.json.JSONException;
@@ -46,7 +45,7 @@ public class SearchFinishInfoActivity extends BaseActivity {
 
     private EditText etSearchData;
 
-    private static final String HOST_SEARCH_ORDER_REQUEST = "http://192.168.0.111:8081/";
+    private static final String HOST_SEARCH_ORDER_REQUEST = "http://gzzhizhuo.com:8081/";
 
     private static final String HOST_HISTORY = "http://gzzhizhuo.com:8081/history/";
 
