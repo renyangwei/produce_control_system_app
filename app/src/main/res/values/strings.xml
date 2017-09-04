@@ -30,6 +30,12 @@
     <string name="search_hint">请输入订单号、客户名称或者切长</string>
 
     <string name="group">一号线</string>
-    <string name="search">搜索</string>
+    <string name="search">搜\t\t\t索</string>
     <string name="search_order_result">订单搜索结果</string>
+    <string name="search_finish_info_result">完工资料搜索结果</string>
+
+    <string name="search_finish_info">搜索完工资料</string>
+
+    <string name="start_time">开始时间</string>
+    <string name="finish_time">完工时间</string>
 </resources>

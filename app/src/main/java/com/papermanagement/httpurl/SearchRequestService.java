@@ -11,7 +11,7 @@ import retrofit2.http.POST;
  * 上传搜索订单参数
  */
 
-public interface SearchOrderRequestService {
+public interface SearchRequestService {
 
     @POST("/search/request/")
     Call<ForceDataResponse> postOrderRequest(@Body RequestBody data);

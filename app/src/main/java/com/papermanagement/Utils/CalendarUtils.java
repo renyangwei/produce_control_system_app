@@ -1,6 +1,7 @@
 package com.papermanagement.Utils;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -32,13 +33,24 @@ public class CalendarUtils {
         return Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
 
+    /**
+     * 获得当前小时
+     * @return
+     */
+    public static int getHour() {
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    }
+
+    public static int getMinute() {
+        return Calendar.getInstance().get(Calendar.MINUTE);
+    }
 
     /**
      * 获得今天的时间格式
      * @return      今天
      */
     public static String getToDay() {
-        return getYear() + "-" + formatCalendar(getMonth() + 1) + "-" +getDayOfMonth();
+        return getYear() + "-" + formatCalendar(getMonth() + 1) + "-" +formatCalendar(getDayOfMonth());
     }
 
     /**
@@ -63,4 +75,15 @@ public class CalendarUtils {
         DecimalFormat df = new DecimalFormat("00");
         return df.format(dayOrMonth);
     }
+
+    /**
+     * 获得当前时间
+     * @return 当前时间
+     */
+    public static String getTodayTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat ("hh:mm");
+        Calendar calendar = Calendar.getInstance();
+        return formatter.format(calendar.getTime());
+    }
+
 }

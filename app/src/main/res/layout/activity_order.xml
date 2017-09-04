@@ -20,15 +20,15 @@
             android:textSize="14sp"
             android:text="@string/order"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            style="@style/Widget.AppCompat.Button.Borderless"
             android:src="@drawable/search"
             android:scaleType="fitCenter"
-            android:onClick="onSearch"/>
+            android:onClick="onSearch"
+            android:padding="10dp"/>
 
     </RelativeLayout>
 
@@ -77,11 +77,18 @@
         android:src="@color/colorDivider"
         android:layout_below="@+id/rl_2"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
         android:layout_below="@+id/divider"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

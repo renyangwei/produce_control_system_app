@@ -2,6 +2,7 @@ package com.papermanagement.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,7 +36,9 @@ public class OrderActivity extends BaseActivity {
 
     private OrderBean[] orders;
 
-    private static final String HOST_ORDER = "http://gzzhizhuo.com:8081/order/";
+    private static final String HOST_ORDER = "http://192.168.0.111:8081/order/";
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +50,22 @@ public class OrderActivity extends BaseActivity {
         orderAdapter.setOntItemClickListner(itemClickListner);
         recyclerView.setAdapter(orderAdapter);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
+        swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-//        getData();
+        getData();
     }
+
+    SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            getData();
+        }
+    };
 
     /**
      * 搜索按钮
@@ -72,12 +84,10 @@ public class OrderActivity extends BaseActivity {
         }
     };
 
-    public void onRefreshOrder(View view) {
-        getData();
-    }
-
     private void getData() {
-        progressBar.setVisibility(View.VISIBLE);
+        if (!swipeRefreshLayout.isRefreshing()) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
         String factory = DataUtils.readFactory(this);
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
@@ -90,6 +100,9 @@ public class OrderActivity extends BaseActivity {
             @Override
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {
                 progressBar.setVisibility(View.INVISIBLE);
+                if (swipeRefreshLayout.isRefreshing()) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
                 orders = response.body();
                 for (OrderBean orderBean: orders) {
                     Log.d("OrderActivity", orderBean.toString());
@@ -100,6 +113,9 @@ public class OrderActivity extends BaseActivity {
             @Override
             public void onFailure(Call<OrderBean[]> call, Throwable t) {
                 progressBar.setVisibility(View.INVISIBLE);
+                if (swipeRefreshLayout.isRefreshing()) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
                 Toast.makeText(getBaseContext(), getString(R.string.toast_error), Toast.LENGTH_SHORT).show();
                 Log.d("OrderActivity", t.toString());
             }

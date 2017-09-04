@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="com.papermanagement.activity.FinishActivity">
+    tools:context="com.papermanagement.activity.SearchFinishInfoResultActivity">
 
     <RelativeLayout
         android:id="@+id/rl"
@@ -18,19 +17,9 @@
             android:background="@color/colorMain"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/finish_data"
+            android:text="@string/search_finish_info_result"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
-
-        <ImageView
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:onClick="onFinishSearch"
-            android:padding="10dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/search" />
 
     </RelativeLayout>
 

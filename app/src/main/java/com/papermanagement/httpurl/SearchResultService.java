@@ -10,7 +10,7 @@ import retrofit2.http.Query;
  *  订单搜索结果
  */
 
-public interface SearchOrderResultService {
+public interface SearchResultService {
 
     @GET("/search/result")
     Call<OrderBean[]> getOrderSearchResult(@Query("cname") String factory, @Query("group") String group, @Query("type") String type);

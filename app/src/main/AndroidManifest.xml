@@ -26,7 +26,9 @@
         <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.FinishDetailActivity" />
         <activity android:name=".activity.SearchOrderActivity" />
-        <activity android:name=".activity.SearchOrderResultActivity"></activity>
+        <activity android:name=".activity.SearchOrderResultActivity" />
+        <activity android:name=".activity.SearchFinishInfoActivity" />
+        <activity android:name=".activity.SearchFinishInfoResultActivity" />
     </application>
 
 </manifest>

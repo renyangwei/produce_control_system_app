@@ -3,6 +3,7 @@ package com.papermanagement.activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,7 +44,9 @@ public class FinishActivity extends BaseActivity {
 
     private ProgressBar progressBar;
 
-    private static final String HOST_FINISH_INFO = "http://gzzhizhuo.com:8081/finish_info/";
+    private static final String HOST_FINISH_INFO = "http://192.168.0.111:8081/finish_info/";
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class FinishActivity extends BaseActivity {
         btnFinishTime = (Button) findViewById(R.id.btn_finish_time);
         btnFinishTime.setText(CalendarUtils.getToDay());
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
+        swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
     }
 
     FinishInfoAdapter.OnItemClickListner itemClickListner = new FinishInfoAdapter.OnItemClickListner() {
@@ -71,6 +76,14 @@ public class FinishActivity extends BaseActivity {
             startActivity(intent);
         }
     };
+
+    SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            queryFinishInfo();
+        }
+    };
+
 
     @Override
     protected void onStart() {
@@ -95,11 +108,11 @@ public class FinishActivity extends BaseActivity {
     }
 
     /**
-     * 查询按钮
-     * @param view 视图
+     * 搜索按钮
+     * @param view
      */
-    public void onQuery(View view) {
-        queryFinishInfo();
+    public void onFinishSearch(View view) {
+        startActivity(new Intent(this, SearchFinishInfoActivity.class));
     }
 
     /**
@@ -142,7 +155,9 @@ public class FinishActivity extends BaseActivity {
      * 查询
      */
     private void queryFinishInfo() {
-        progressBar.setVisibility(View.VISIBLE);
+        if (!swipeRefreshLayout.isRefreshing()) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
         String factory = DataUtils.readFactory(this);
         String startTime = btnStartTime.getText().toString();
         String finishTime = btnFinishTime.getText().toString();
@@ -157,6 +172,9 @@ public class FinishActivity extends BaseActivity {
             @Override
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {
                 progressBar.setVisibility(View.INVISIBLE);
+                if (swipeRefreshLayout.isRefreshing()) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
                 OrderBean[] orders = response.body();
                 for (OrderBean orderBean: orders) {
                     Log.d("FinishActivity", orderBean.toString());
@@ -167,6 +185,9 @@ public class FinishActivity extends BaseActivity {
             @Override
             public void onFailure(Call<OrderBean[]> call, Throwable t) {
                 progressBar.setVisibility(View.INVISIBLE);
+                if (swipeRefreshLayout.isRefreshing()) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
                 Toast.makeText(getBaseContext(), getString(R.string.toast_error), Toast.LENGTH_SHORT).show();
                 Log.d("FinishActivity", t.toString());
             }

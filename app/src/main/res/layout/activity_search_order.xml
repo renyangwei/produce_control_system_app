@@ -3,8 +3,7 @@
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="com.papermanagement.activity.SearchOrderActivity"
-android:orientation="vertical">
+tools:context="com.papermanagement.activity.SearchOrderActivity">
 
     <RelativeLayout
         android:id="@+id/rl_1"
@@ -23,25 +22,36 @@ android:orientation="vertical">
 
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/et_search_data"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/search_hint"
-        android:layout_below="@id/rl_1"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/rl_1"
+        android:padding="@dimen/activity_horizontal_margin">
 
-    <Spinner
-        android:id="@+id/spinner_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_search_data"/>
+        <EditText
+            android:id="@+id/et_search_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_hint"
+            android:textSize="14sp"/>
 
-    <Button
-        android:text="@string/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onSearchOrder"
-        android:layout_below="@id/spinner_group"/>
+        <Spinner
+            android:id="@+id/spinner_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:text="@string/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSearchOrder"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@color/colorMain"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
