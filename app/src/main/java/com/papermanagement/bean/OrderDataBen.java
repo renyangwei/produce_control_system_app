@@ -1,7 +1,5 @@
 package com.papermanagement.bean;
 
-import android.text.TextUtils;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.papermanagement.Utils.DataUtils;
@@ -34,7 +32,7 @@ public class OrderDataBen implements Serializable {
     @Expose
     private String klzhdh;      //楞别
 
-    @SerializedName("Xdzd")
+    @SerializedName("Zd")
     @Expose
     private String zd;        //纸度
 
@@ -46,7 +44,7 @@ public class OrderDataBen implements Serializable {
     @Expose
     private String pscl;        //排产数量
 
-    @SerializedName("Ddsm")
+    @SerializedName("Ddms")
     @Expose
     private String ddms;        //说明
 
@@ -76,7 +74,7 @@ public class OrderDataBen implements Serializable {
 
     @SerializedName("Ms")
     @Expose
-    private String ms;
+    private float ms;
 
     @SerializedName("FinishTime")
     @Expose
@@ -203,10 +201,10 @@ public class OrderDataBen implements Serializable {
     }
 
     public String getMs() {
-        return ms.split("\\.")[0];
+        return String.valueOf(ms/100).split("\\.")[0];
     }
 
-    public void setMs(String ms) {
+    public void setMs(float ms) {
         this.ms = ms;
     }
 

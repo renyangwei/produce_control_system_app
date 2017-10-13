@@ -3,10 +3,8 @@ package com.papermanagement.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * 数据处理类
@@ -56,6 +54,28 @@ public class DataUtils {
     public static String readFactory(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Factory", context.MODE_PRIVATE);
         return sharedPreferences.getString("factory", "empty");
+    }
+
+    /**
+     * 保存产线
+     * @param group     产线
+     * @param context   上下文
+     */
+    public static void saveGroup(String group, Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Group", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Group", group);
+        editor.apply();
+    }
+
+    /**
+     * 读取产线
+     * @param context   上下文
+     * @return  产线
+     */
+    public static String readGroup(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Group", context.MODE_PRIVATE);
+        return sharedPreferences.getString("Group", "empty");
     }
 
     /**
