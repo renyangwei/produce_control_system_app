@@ -220,7 +220,7 @@ public class RealTimeDateActivity extends BaseActivity {
      * 从服务端获得数据
      * @param factory 厂家名称
      */
-    private void getData(String factory, String group) {
+    private void getData(String factory, final String group) {
         Log.d(TAG, "getData, first factory:" + factory);
         progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
@@ -238,6 +238,7 @@ public class RealTimeDateActivity extends BaseActivity {
                 try {
                     Log.d(TAG, paperManangeBean.toString());
                     adapter.setData(DataUtils.parseInfo(paperManangeBean.getOther()));
+                    DataUtils.saveGroup(group, getBaseContext());
                 } catch (Exception e) {
                     Toast.makeText(getBaseContext(), getString(R.string.toast_error_format), Toast.LENGTH_SHORT).show();
                     return;

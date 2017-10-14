@@ -123,12 +123,12 @@ public class SearchOrderActivity extends BaseActivity {
      * @param view 视图
      */
     public void onSearchOrder(View view) {
-        progressBar.setVisibility(View.VISIBLE);
         String searchData = etSearchData.getText().toString().trim();
         if (TextUtils.isEmpty(searchData)) {
             Toast.makeText(this, "请输入参数", Toast.LENGTH_SHORT).show();
             return;
         }
+        progressBar.setVisibility(View.VISIBLE);
         JSONObject bodyJson = new JSONObject();
         try {
             bodyJson.put("Cname", DataUtils.readFactory(this));
@@ -186,7 +186,7 @@ public class SearchOrderActivity extends BaseActivity {
                 .baseUrl(HOST_SEARCH_ORDER_REQUEST)
                 .build();
         SearchResultService searchResultService = retrofit.create(SearchResultService.class);
-        Call<OrderBean[]> call = searchResultService.getOrderSearchResult(DataUtils.readFactory(this), "一号线", "order");
+        Call<OrderBean[]> call = searchResultService.getOrderSearchResult(DataUtils.readFactory(this), group, "order");
         call.enqueue(new Callback<OrderBean[]>() {
             @Override
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {
