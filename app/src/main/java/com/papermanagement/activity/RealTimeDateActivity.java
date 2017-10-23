@@ -8,9 +8,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
@@ -85,12 +88,55 @@ public class RealTimeDateActivity extends BaseActivity {
 
     String fact;
 
+    private GestureDetectorCompat mDetector; //手势检测
+
+    private static final int FLING_MIN_DISTANCE = 50;
+    private static final int FLING_MIN_VELOCITY = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+            Log.d(DEBUG_TAG, "onFling: velocityX=" + velocityX + ",velocityY=" + velocityY);
+            if (event1.getX()-event2.getX() > FLING_MIN_DISTANCE
+                    && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+                //左滑
+                startActivity(new Intent(getBaseContext(), HistoryDataActivity.class));
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+            } else if (event2.getX()-event1.getX() > FLING_MIN_DISTANCE
+                    && Math.abs(velocityX) > FLING_MIN_VELOCITY) {
+                //右滑
+            } else if (event2.getY()-event1.getY() >= FLING_MIN_DISTANCE
+                    && Math.abs(velocityY) > FLING_MIN_VELOCITY) {
+                //下滑
+                startActivity(new Intent(getBaseContext(), OrderActivity.class));
+                overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
+            } else if (event1.getY()-event2.getY() >= FLING_MIN_DISTANCE
+                    && Math.abs(velocityY) > FLING_MIN_VELOCITY) {
+                //上滑
+                startActivity(new Intent(getBaseContext(), FinishActivity.class));
+                overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
+            }
+            return true;
+        }
+
     }
 
     @Override
@@ -125,6 +171,13 @@ public class RealTimeDateActivity extends BaseActivity {
         spinner = (Spinner) findViewById(R.id.spinner_group);
         spinner.setOnItemSelectedListener(itemSelectedListener);
         ibOptions = (ImageButton) findViewById(R.id.ib_options);
+        gridView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mDetector.onTouchEvent(event);
+                return false;
+            }
+        });
     }
 
     AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
@@ -180,7 +233,7 @@ public class RealTimeDateActivity extends BaseActivity {
 
     private void showPopWindow() {
         View popupView = getLayoutInflater().inflate(R.layout.popupwindow, null);
-        window = new PopupWindow(popupView, DataUtils.dip2px(this, 150), DataUtils.dip2px(this, 200));
+        window = new PopupWindow(popupView, DataUtils.dip2px(this, 150), DataUtils.dip2px(this, 50));
         window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
         window.setFocusable(true);
         window.setOutsideTouchable(true);

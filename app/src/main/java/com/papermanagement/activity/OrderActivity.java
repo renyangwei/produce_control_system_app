@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -36,8 +37,8 @@ public class OrderActivity extends BaseActivity {
 
     private OrderBean[] orders;
 
-//    private static final String HOST_ORDER = "http://gzzhizhuo.com:8081/order/";
-    private static final String HOST_ORDER = "http://172.23.0.132:8081/order/";
+    private static final String HOST_ORDER = "http://gzzhizhuo.com:8081/order/";
+//    private static final String HOST_ORDER = "http://192.168.0.103:8081/order/";
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -122,5 +123,12 @@ public class OrderActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        finish();
+        overridePendingTransition(R.anim.slide_from_bottom, R.anim.slide_to_top);
+        return super.onKeyDown(keyCode, event);
     }
 }

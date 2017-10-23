@@ -226,11 +226,11 @@ public class FinishTimeBean implements Serializable{
         list.add("不良:" + DataUtils.isEmpty(getBlpsl()));
         list.add("修边:" + DataUtils.isEmpty(getXbmm()));
         list.add("切长:" + DataUtils.isEmpty(getZbcd2()));
-        list.add("板宽:" + DataUtils.isEmpty(getKs()));
+        list.add("剖:" + DataUtils.isEmpty(getKs()));
         list.add("机速:" + DataUtils.isEmpty(getJs()));
-        list.add("停时:" + DataUtils.isEmpty(getStopTime()));
+        list.add("停时（秒）:" + DataUtils.isEmpty(getStopTime()));
         list.add("停次:" + DataUtils.isEmpty(getStopSpec()));
-        list.add("用时:" + DataUtils.isEmpty(getYs()));
+        list.add("用时（秒）:" + DataUtils.isEmpty(getYs()));
         list.add("损耗:" + DataUtils.isEmpty(getShl()));
         return list;
     }

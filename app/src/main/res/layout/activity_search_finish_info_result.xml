@@ -75,9 +75,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="@dimen/order_id_width"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="订单编号"
                 android:textColor="@android:color/black" />
 

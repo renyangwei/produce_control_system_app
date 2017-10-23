@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -174,7 +175,7 @@ public class FinishActivity extends BaseActivity {
                     swipeRefreshLayout.setRefreshing(false);
                 }
                 OrderBean[] orders = response.body();
-                for (OrderBean orderBean: orders) {
+                for (OrderBean orderBean : orders) {
                     Log.d("FinishActivity", orderBean.toString());
                 }
                 finishInfoAdapter.setItem(orders);
@@ -190,5 +191,12 @@ public class FinishActivity extends BaseActivity {
                 Log.d("FinishActivity", t.toString());
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        finish();
+        overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_bottom);
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -434,4 +435,10 @@ public class HistoryDataActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        finish();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        return super.onKeyDown(keyCode, event);
+    }
 }

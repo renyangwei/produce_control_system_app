@@ -20,7 +20,8 @@
         android:text="历史数据"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:onClick="onToHistory"
-        android:gravity="start|center_vertical"/>
+        android:gravity="start|center_vertical"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btn_order"
@@ -29,7 +30,8 @@
         android:text="订单信息"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:onClick="onToOrder"
-        android:gravity="start|center_vertical"/>
+        android:gravity="start|center_vertical"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btn_finish"
@@ -38,5 +40,6 @@
         android:text="完工资料"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:onClick="onToFinish"
-        android:gravity="start|center_vertical"/>
+        android:gravity="start|center_vertical"
+        android:visibility="gone"/>
 </LinearLayout>
