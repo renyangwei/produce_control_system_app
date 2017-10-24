@@ -90,7 +90,7 @@ public class RealTimeDateActivity extends BaseActivity {
 
     private GestureDetectorCompat mDetector; //手势检测
 
-    private static final int FLING_MIN_DISTANCE = 50;
+    private static final int FLING_MIN_DISTANCE = 200;
     private static final int FLING_MIN_VELOCITY = 0;
 
 

@@ -61,7 +61,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
                 }
             }
         });
-        if (position == 0) {
+        if (position == 0 && TextUtils.equals(orderDataBen.getZt(), "2")) {
             holder.tvScxh.setTextColor(ContextCompat.getColor(mContext, R.color.red));
             holder.tvKhjc.setTextColor(ContextCompat.getColor(mContext, R.color.red));
             holder.tvMxbh.setTextColor(ContextCompat.getColor(mContext, R.color.red));
