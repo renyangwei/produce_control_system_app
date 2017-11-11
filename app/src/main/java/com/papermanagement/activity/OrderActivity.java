@@ -97,7 +97,7 @@ public class OrderActivity extends BaseActivity {
                 .baseUrl(HOST_ORDER)
                 .build();
         OrderService orderService = retrofit.create(OrderService.class);
-        Call<OrderBean[]> call = orderService.getOrders(factory, "一号线");
+        Call<OrderBean[]> call = orderService.getOrders(factory, DataUtils.readGroup(this));
         call.enqueue(new Callback<OrderBean[]>() {
             @Override
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {

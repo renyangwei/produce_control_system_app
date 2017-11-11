@@ -166,7 +166,7 @@ public class FinishActivity extends BaseActivity {
                 .baseUrl(HOST_FINISH_INFO)
                 .build();
         FinishInfoService finishInfoService = retrofit.create(FinishInfoService.class);
-        Call<OrderBean[]> call = finishInfoService.getFinishInfo(factory, startTime, finishTime, "一号线");
+        Call<OrderBean[]> call = finishInfoService.getFinishInfo(factory, startTime, finishTime, DataUtils.readGroup(this));
         call.enqueue(new Callback<OrderBean[]>() {
             @Override
             public void onResponse(Call<OrderBean[]> call, Response<OrderBean[]> response) {
