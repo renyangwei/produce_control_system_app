@@ -74,7 +74,7 @@ public class OrderDataBen implements Serializable {
 
     @SerializedName("Ms")
     @Expose
-    private float ms;
+    private Object ms;
 
     @SerializedName("FinishTime")
     @Expose
@@ -201,10 +201,23 @@ public class OrderDataBen implements Serializable {
     }
 
     public String getMs() {
-        return String.valueOf(ms/100).split("\\.")[0];
+        float fms;
+        String sms;
+        try {
+            fms = (float)ms;
+            return String.valueOf(fms/100).split("\\.")[0];
+        } catch (Exception e) {
+            e.printStackTrace();
+            sms = String.valueOf(ms);
+            if (sms.length() > 0) {
+                return String.valueOf(Float.parseFloat(sms)/100).split("\\.")[0];
+            } else {
+                return sms;
+            }
+        }
     }
 
-    public void setMs(float ms) {
+    public void setMs(Object ms) {
         this.ms = ms;
     }
 

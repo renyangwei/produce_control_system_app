@@ -60,7 +60,7 @@ public class RealTimeDateActivity extends BaseActivity {
 
     GridViewAdapter adapter;
 
-    ProgressBar progressBar;
+//    ProgressBar progressBar;
 
     boolean refreshing;                          //是否正在刷新
 
@@ -70,7 +70,7 @@ public class RealTimeDateActivity extends BaseActivity {
 
     Button btnRefresh;
 
-    static final int TIME_LIMIT = 5;            //刷新倒计时
+    static int TIME_LIMIT;            //刷新倒计时
 
     static final long TIME_INTERVAL = 1000;     //刷新间隔
 
@@ -98,6 +98,7 @@ public class RealTimeDateActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TIME_LIMIT = DataUtils.readTimeLimit(getApplicationContext());
         initViews();
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
     }
@@ -165,7 +166,7 @@ public class RealTimeDateActivity extends BaseActivity {
         gridView = (GridView) findViewById(R.id.grid_view);
         adapter = new GridViewAdapter(this, R.layout.grid_view_cell);
         gridView.setAdapter(adapter);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+//        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         handler = new Handler();
         btnRefresh = (Button) findViewById(R.id.btn_refresh);
         spinner = (Spinner) findViewById(R.id.spinner_group);
@@ -208,6 +209,14 @@ public class RealTimeDateActivity extends BaseActivity {
     }
 
     /**
+     * 修改刷新频率
+     * @param view
+     */
+    public void onChangeRefresh(View view) {
+        showChangeRefreshDialog();
+    }
+
+    /**
      * 刷新点击
      * @param view 视图
      */
@@ -233,7 +242,7 @@ public class RealTimeDateActivity extends BaseActivity {
 
     private void showPopWindow() {
         View popupView = getLayoutInflater().inflate(R.layout.popupwindow, null);
-        window = new PopupWindow(popupView, DataUtils.dip2px(this, 150), DataUtils.dip2px(this, 50));
+        window = new PopupWindow(popupView, DataUtils.dip2px(this, 150), DataUtils.dip2px(this, 100));
         window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
         window.setFocusable(true);
         window.setOutsideTouchable(true);
@@ -275,7 +284,7 @@ public class RealTimeDateActivity extends BaseActivity {
      */
     private void getData(String factory, final String group) {
         Log.d(TAG, "getData, first factory:" + factory);
-        progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
                         //这里建议：- Base URL: 总是以/结尾；- @Url: 不要以/开头
@@ -286,7 +295,7 @@ public class RealTimeDateActivity extends BaseActivity {
         call.enqueue(new Callback<PaperManageBean>() {
             @Override
             public void onResponse(Call<PaperManageBean> call, Response<PaperManageBean> response) {
-                progressBar.setVisibility(View.INVISIBLE);
+//                progressBar.setVisibility(View.INVISIBLE);
                 PaperManageBean paperManangeBean = response.body();
                 try {
                     Log.d(TAG, paperManangeBean.toString());
@@ -304,7 +313,7 @@ public class RealTimeDateActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<PaperManageBean> call, Throwable t) {
-                progressBar.setVisibility(View.INVISIBLE);
+//                progressBar.setVisibility(View.INVISIBLE);
                 String err = t.toString();
                 Log.e(TAG, err);
                 if (err.contains("MalformedJsonException")) {
@@ -325,7 +334,7 @@ public class RealTimeDateActivity extends BaseActivity {
      */
     private void readGroups(String factory) {
         Log.d(TAG, "readGroups factory is" + factory);
-        progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
                         //这里建议：- Base URL: 总是以/结尾；- @Url: 不要以/开头
@@ -337,7 +346,7 @@ public class RealTimeDateActivity extends BaseActivity {
             @Override
             public void onResponse(Call<GroupBean> call, Response<GroupBean> response) {
                 //处理没有返回的情况
-                progressBar.setVisibility(View.INVISIBLE);
+//                progressBar.setVisibility(View.INVISIBLE);
                 GroupBean groupBean = response.body();
                 String groupStr = groupBean.getGroup();
                 Log.d(TAG, "response is " + groupStr);
@@ -356,11 +365,17 @@ public class RealTimeDateActivity extends BaseActivity {
                 spinnerAdapter = new ArrayAdapter<>(RealTimeDateActivity.this,
                         android.R.layout.simple_spinner_item, listGroup);
                 spinner.setAdapter(spinnerAdapter);
+                //查询产线是否存在
+                String gp = DataUtils.readGroup(getBaseContext());
+                if (listGroup.contains(gp)) {
+                    spinner.setSelection(listGroup.indexOf(gp));
+                }
+
             }
 
             @Override
             public void onFailure(Call<GroupBean> call, Throwable t) {
-                progressBar.setVisibility(View.INVISIBLE);
+//                progressBar.setVisibility(View.INVISIBLE);
                 Log.e(TAG, t.toString());
                 Toast.makeText(RealTimeDateActivity.this, "出错了，请重试", Toast.LENGTH_SHORT).show();
                 btnRefresh.setText("刷新(开始)");
@@ -369,6 +384,58 @@ public class RealTimeDateActivity extends BaseActivity {
             }
         });
 
+    }
+
+    /**
+     * 输入修改刷新频率弹窗
+     */
+    private void showChangeRefreshDialog() {
+        if (runnable != null) {
+            handler.removeCallbacks(runnable);
+        }
+        final EditText editText = new EditText(this);
+        editText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+        editText.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+        editText.setTypeface(Typeface.create("", R.style.MyEditText));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            editText.setTextColor(getResources().getColor(android.R.color.black, null));
+        } else {
+            editText.setTextColor(getResources().getColor(android.R.color.black));
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(RealTimeDateActivity.this);
+        builder.setView(editText);
+        builder.setTitle(getString(R.string.dialog_title_change_refresh));
+        builder.setCancelable(false);
+        builder.setNegativeButton(getText(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (window != null) {
+                    window.dismiss();
+                }
+            }
+        });
+        builder.setPositiveButton(getText(R.string.dialog_sure), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                refreshTime = 0;
+                refreshing = true;
+                String timeLimit = editText.getText().toString().trim();
+                Log.d(TAG, "dialog positive btn:" + timeLimit);
+                try {
+                    TIME_LIMIT = Integer.parseInt(timeLimit);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    Toast.makeText(RealTimeDateActivity.this, "请输入正确的格式", Toast.LENGTH_SHORT).show();
+                }
+                DataUtils.saveTimeLimit(getApplicationContext(), TIME_LIMIT);
+                //查询产线
+                readGroups(fact);
+                if (window != null) {
+                    window.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 
     /**

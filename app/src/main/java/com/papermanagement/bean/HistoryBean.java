@@ -2,6 +2,7 @@ package com.papermanagement.bean;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.papermanagement.Utils.DataUtils;
 
 /**
  * 历史数据
@@ -41,7 +42,7 @@ public class HistoryBean {
     }
 
     public String getOther() {
-        return other;
+        return pareseOther(other);
     }
 
     public String getClazz() {
@@ -59,6 +60,18 @@ public class HistoryBean {
     @Override
     public String toString() {
         return "id = " + id + ",factory = " + factory + ", other = " +
-                other + ", class = " + clazz + ", time" + time + ", group = " + group;
+                other + ", class = " + clazz + ", time=" + time + ", group = " + group;
     }
+
+    private String pareseOther(String other) {
+        String[] others = other.split("&");
+        for (String oth : others) {
+            if (oth.contains("开工时间") || oth.contains("完成时间")) {
+                String[] s = oth.split("=");
+                other = other.replace(s[1], DataUtils.parasTime(s[1]));
+            }
+        }
+        return other;
+    }
+
 }

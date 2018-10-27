@@ -8,9 +8,18 @@
         android:id="@+id/btn_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="切换"
+        android:text="切换公司"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:onClick="onSwitch"
+        android:gravity="start|center_vertical"/>
+
+    <Button
+        android:id="@+id/btn_change_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改刷新频率"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:onClick="onChangeRefresh"
         android:gravity="start|center_vertical"/>
 
     <Button

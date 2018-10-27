@@ -11,6 +11,8 @@ import java.util.ArrayList;
  */
 public class DataUtils {
 
+    private static final int TIME_LIMIT = 5;//默认倒计时5秒
+
     /**
      * 解析数据
      * @param other 其他数据
@@ -86,8 +88,12 @@ public class DataUtils {
     public static String parasTime(String time) {
         if (TextUtils.isEmpty(time))
             return "";
-        String finishTime = time.replace("T", " ");
-        return finishTime.substring(0, 19);
+        if (time.contains("T")) {
+            String finishTime = time.replace("T", " ");
+            return finishTime.substring(0, 19);
+        }
+        return time;
+
     }
 
     /**
@@ -98,5 +104,27 @@ public class DataUtils {
     public static String isEmpty(String s) {
         return (TextUtils.isEmpty(s)?"":s);
     }
+
+    /**
+     * 保存倒计时时间
+     * @param timeLimit 倒计时时间
+     */
+    public static void saveTimeLimit(Context context, int timeLimit) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("TimeLimit", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("TimeLimit", timeLimit);
+        editor.apply();
+    }
+
+    /**
+     * 读取倒计时时间
+     * @param context
+     * @return 倒计时时间
+     */
+    public static int readTimeLimit(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("TimeLimit", context.MODE_PRIVATE);
+        return sharedPreferences.getInt("TimeLimit", TIME_LIMIT);
+    }
+
 
 }

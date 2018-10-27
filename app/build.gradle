@@ -5,11 +5,11 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.papermanagement"
+        applicationId "com.papermanagement.zhizhuo"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 12
-        versionName "0.0.11"
+        versionName "0.0.12"
     }
     buildTypes {
         release {

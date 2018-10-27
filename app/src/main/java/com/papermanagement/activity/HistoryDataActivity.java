@@ -26,7 +26,11 @@ import com.papermanagement.httpurl.HistoryService;
 import com.papermanagement.httpurl.LastHistoryService;
 import com.papermanagement.response.ForceDataResponse;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -55,6 +59,8 @@ public class HistoryDataActivity extends BaseActivity {
     GridView gridViewHistory;
 
     GridViewAdapter adapter;
+
+    private final static Comparator<Object> CHINA_COMPARE = Collator.getInstance(java.util.Locale.CHINA);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,6 +188,7 @@ public class HistoryDataActivity extends BaseActivity {
             @Override
             public void onResponse(Call<HistoryBean> call, Response<HistoryBean> response) {
                 HistoryBean historyBean = response.body();
+                Log.d(TAG, historyBean.toString());
                 String date = historyBean.getTime();
                 if (TextUtils.isEmpty(date)) {
                     date = CalendarUtils.getYesterday();
@@ -191,6 +198,7 @@ public class HistoryDataActivity extends BaseActivity {
                 if (TextUtils.isEmpty(group)) {
                     group = "一号线";
                 }
+//                String group = DataUtils.readGroup(getBaseContext());
                 btnGroup.setText(group);
                 String clazz = historyBean.getClazz();
                 if (TextUtils.isEmpty(clazz)) {
@@ -232,10 +240,28 @@ public class HistoryDataActivity extends BaseActivity {
                 HistoryBean[] historyBeans = response.body();
                 ArrayList<String> arrayList = new ArrayList<>();
                 for (HistoryBean historyBean : historyBeans) {
-                    arrayList.add(historyBean.getGroup());
+                    String gp = historyBean.getGroup();
+                    if (gp.contains("一")) {
+                        gp = "1" + gp;
+                    } else if (gp.contains("二")) {
+                        gp = "2"  + gp;
+                    } else if (gp.contains("三")) {
+                        gp = "3"  + gp;
+                    } else if (gp.contains("四")) {
+                        gp = "4" + gp;
+                    } else if (gp.contains("五")) {
+                        gp = "5" + gp;
+                    } else if (gp.contains("六")) {
+                        gp = "6" + gp;
+                    }
+                    arrayList.add(gp);
                 }
+                Collections.sort(arrayList, CHINA_COMPARE);
                 groupArray = new String[arrayList.size()];
                 groupArray = arrayList.toArray(groupArray);
+                for (int i=0; i<groupArray.length; i++) {
+                    groupArray[i] = groupArray[i].substring(1);
+                }
                 new AlertDialog.Builder(HistoryDataActivity.this)
                         .setTitle("请选择生产线")
                         .setItems(groupArray, new DialogInterface.OnClickListener() {
@@ -275,7 +301,10 @@ public class HistoryDataActivity extends BaseActivity {
                 HistoryBean[] historyBeans = response.body();
                 ArrayList<String> arrayList = new ArrayList<>();
                 for (HistoryBean historyBean : historyBeans) {
-                    arrayList.add(historyBean.getClazz());
+                    String clazz = historyBean.getClazz();
+                    if (!TextUtils.isEmpty(clazz)) {
+                        arrayList.add(clazz);
+                    }
                 }
                 classArray = new String[arrayList.size()];
                 classArray = arrayList.toArray(classArray);
