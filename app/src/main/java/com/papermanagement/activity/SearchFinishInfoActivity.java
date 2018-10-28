@@ -206,10 +206,10 @@ public class SearchFinishInfoActivity extends BaseActivity {
      */
     public void onSearchOrder(View view) {
         String searchData = etSearchData.getText().toString().trim();
-        if (TextUtils.isEmpty(searchData)) {
-            Toast.makeText(this, "请输入参数", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (TextUtils.isEmpty(searchData)) {
+//            Toast.makeText(this, "请输入参数", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         progressBar.setVisibility(View.VISIBLE);
         String startTime = btnStartDate.getText().toString() + " " + btnStartTime.getText().toString();
         String finishTime = btnFinishDate.getText().toString() + " " + btnFinishTime.getText().toString();

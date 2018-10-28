@@ -232,6 +232,7 @@ public class FinishTimeBean implements Serializable{
         list.add("停次:" + DataUtils.isEmpty(getStopSpec()));
         list.add("用时（秒）:" + DataUtils.isEmpty(getYs()));
         list.add("损耗:" + DataUtils.isEmpty(getShl()));
+        list.add("压线:");
         return list;
     }
 }

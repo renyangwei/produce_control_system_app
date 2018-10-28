@@ -125,10 +125,10 @@ public class SearchOrderActivity extends BaseActivity {
      */
     public void onSearchOrder(View view) {
         String searchData = etSearchData.getText().toString().trim();
-        if (TextUtils.isEmpty(searchData)) {
-            Toast.makeText(this, "请输入参数", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (TextUtils.isEmpty(searchData)) {
+//            Toast.makeText(this, "请输入参数", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         progressBar.setVisibility(View.VISIBLE);
         JSONObject bodyJson = new JSONObject();
         try {

@@ -234,7 +234,7 @@ public class OrderDataBen implements Serializable {
         list.add("订单编号:" + DataUtils.isEmpty(getMxbh()));
         list.add("材质:" + DataUtils.isEmpty(getZbdh()));
         list.add("楞别:" + DataUtils.isEmpty(getKlzhdh()));
-        list.add("纸度:" + DataUtils.isEmpty(getZd()));
+        list.add("门幅:" + DataUtils.isEmpty(getZd()));
         list.add("排产数量:" + DataUtils.isEmpty(getPscl()));
         list.add("切长:" + DataUtils.isEmpty(getZbcd2()));
         list.add("米数:" + DataUtils.isEmpty(getMs()));
