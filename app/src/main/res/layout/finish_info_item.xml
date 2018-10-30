@@ -31,6 +31,24 @@
             android:layout_gravity="center_vertical"/>
 
         <TextView
+            android:id="@+id/tv_mf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/men_fu"
+            android:textColor="@android:color/black"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_cz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cai_zhi"
+            android:textColor="@android:color/black"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
             android:id="@+id/tv_start_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

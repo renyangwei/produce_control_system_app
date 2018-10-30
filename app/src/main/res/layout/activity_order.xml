@@ -62,6 +62,20 @@
             android:layout_weight="2"/>
 
         <TextView
+            android:text="@string/men_fu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_weight="2"/>
+
+        <TextView
+            android:text="@string/cai_zhi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_weight="2"/>
+
+        <TextView
             android:text="预计完工时间"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

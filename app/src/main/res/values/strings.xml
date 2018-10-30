@@ -39,4 +39,7 @@
 
     <string name="start_time">开始时间</string>
     <string name="finish_time">完工时间</string>
+
+    <string name="men_fu">门幅</string>
+    <string name="cai_zhi">材质</string>
 </resources>

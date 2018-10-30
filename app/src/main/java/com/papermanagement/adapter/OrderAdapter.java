@@ -52,6 +52,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
         holder.tvScxh.setText(orderDataBen.getScxh());
         holder.tvKhjc.setText(orderDataBen.getKhjc());
         holder.tvMxbh.setText(orderDataBen.getMxbh());
+        holder.tvMf.setText(orderDataBen.getZd());
+        holder.tvCz.setText(orderDataBen.getZbdh());
         holder.tvFinishTime.setText(orderDataBen.getFinishTime());
         holder.rlOrderItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,11 +67,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
             holder.tvScxh.setTextColor(ContextCompat.getColor(mContext, R.color.red));
             holder.tvKhjc.setTextColor(ContextCompat.getColor(mContext, R.color.red));
             holder.tvMxbh.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+            holder.tvMf.setTextColor(ContextCompat.getColor(mContext, R.color.red));
+            holder.tvCz.setTextColor(ContextCompat.getColor(mContext, R.color.red));
             holder.tvFinishTime.setTextColor(ContextCompat.getColor(mContext, R.color.red));
         } else {
             holder.tvScxh.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
             holder.tvKhjc.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
             holder.tvMxbh.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
+            holder.tvMf.setTextColor(ContextCompat.getColor(mContext,android.R.color.black));
+            holder.tvCz.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
             holder.tvFinishTime.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
         }
     }
@@ -98,12 +104,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Holder> {
 
         private TextView tvFinishTime;  //预计完成时间
 
+        private TextView tvMf;       //门幅
+
+        private TextView tvCz;      //材质
+
         public Holder(View itemView) {
             super(itemView);
             rlOrderItem = (RelativeLayout) itemView.findViewById(R.id.rl_order_item);
             tvScxh = (TextView) itemView.findViewById(R.id.tv_scxh);
             tvKhjc = (TextView) itemView.findViewById(R.id.tv_khjc);
             tvMxbh = (TextView) itemView.findViewById(R.id.tv_mxbh);
+            tvMf = (TextView) itemView.findViewById(R.id.tv_mf);
+            tvCz = (TextView) itemView.findViewById(R.id.tv_cz);
             tvFinishTime = (TextView) itemView.findViewById(R.id.tv_finishtime);
         }
     }

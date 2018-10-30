@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import com.papermanagement.R;
 import com.papermanagement.bean.FinishTimeBean;
 import com.papermanagement.bean.OrderBean;
-import com.papermanagement.bean.OrderDataBen;
 
 /**
  * 完工资料适配器
@@ -54,6 +53,8 @@ public class FinishInfoAdapter extends RecyclerView.Adapter<FinishInfoAdapter.Ho
         final FinishTimeBean finishTimeBean = gson.fromJson(json, FinishTimeBean.class);
         holder.tvMxbh.setText(finishTimeBean.getMxbh());
         holder.tvKhjc.setText(finishTimeBean.getKhjc());
+        holder.tvMf.setText(finishTimeBean.getZd());
+        holder.tvCz.setText(finishTimeBean.getZbmd());
         holder.tvStartTime.setText(mOrders[position].getStartTime());
         holder.tvFinishTime.setText(mOrders[position].getFinishTime());
         holder.rlOrderItem.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +87,10 @@ public class FinishInfoAdapter extends RecyclerView.Adapter<FinishInfoAdapter.Ho
 
         private TextView tvKhjc;    //客户
 
+        private TextView tvMf;      //门幅
+
+        private TextView tvCz;      //材质
+
         private TextView tvStartTime; //开始时间
 
         private TextView tvFinishTime;  //完成时间
@@ -95,6 +100,8 @@ public class FinishInfoAdapter extends RecyclerView.Adapter<FinishInfoAdapter.Ho
             rlOrderItem = (RelativeLayout) itemView.findViewById(R.id.rl_order_item);
             tvMxbh = (TextView) itemView.findViewById(R.id.tv_mxbh);
             tvKhjc = (TextView) itemView.findViewById(R.id.tv_khjc);
+            tvMf = (TextView) itemView.findViewById(R.id.tv_mf);
+            tvCz = (TextView) itemView.findViewById(R.id.tv_cz);
             tvStartTime = (TextView) itemView.findViewById(R.id.tv_start_time);
             tvFinishTime = (TextView) itemView.findViewById(R.id.tv_finish_time);
         }
